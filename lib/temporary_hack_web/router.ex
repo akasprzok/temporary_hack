@@ -20,6 +20,12 @@ defmodule TemporaryHackWeb.Router do
       error_handler: Pow.Phoenix.PlugErrorHandler
   end
 
+  pipeline :admin do
+    plug Pow.Plug.RequireAuthenticated,
+      error_handler: Pow.Phoenix.PlugErrorHandler
+    plug TemporaryHackWeb.EnsureRolePlug, :admin
+  end
+
   scope "/" do
     pipe_through :browser
 
@@ -27,15 +33,22 @@ defmodule TemporaryHackWeb.Router do
   end
 
   scope "/", TemporaryHackWeb do
+    pipe_through [:browser, :admin]
+
+  end
+
+  scope "/", TemporaryHackWeb do
     pipe_through :browser
 
     live "/", PageLive, :index
+    resources "/posts", PostController
 
-    live "/posts", PostLive.Index, :index
-    live "/posts/new", PostLive.Index, :new
-    live "/posts/:id/edit", PostLive.Index, :edit
-    live "/posts/:id", PostLive.Show, :show
-    live "/posts/:id/show/edit", PostLive.Show, :edit
+    live "/clickers", ClickerLive.Index, :index
+    live "/clickers/new", ClickerLive.Index, :new
+    live "/clickers/:id/edit", ClickerLive.Index, :edit
+
+    live "/clickers/:id", ClickerLive.Show, :show
+    live "/clickers/:id/show/edit", ClickerLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

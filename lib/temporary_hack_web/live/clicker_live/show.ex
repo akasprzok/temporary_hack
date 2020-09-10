@@ -1,7 +1,7 @@
-defmodule TemporaryHackWeb.PostLive.Show do
+defmodule TemporaryHackWeb.ClickerLive.Show do
   use TemporaryHackWeb, :live_view
 
-  alias TemporaryHack.Blog
+  alias TemporaryHack.Demos
 
   @impl true
   def mount(_params, _session, socket) do
@@ -13,9 +13,9 @@ defmodule TemporaryHackWeb.PostLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:post, Blog.get_post!(id))}
+     |> assign(:clicker, Demos.get_clicker!(id))}
   end
 
-  defp page_title(:show), do: "Show Post"
-  defp page_title(:edit), do: "Edit Post"
+  defp page_title(:show), do: "Show Clicker"
+  defp page_title(:edit), do: "Edit Clicker"
 end
