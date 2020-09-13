@@ -3,12 +3,11 @@ defmodule TemporaryHack.Users do
 
   @type t :: %User{}
 
-  @spec create_admin(map()) :: {:ok, t()} | {:error, Ecto.Changeset.t()}
-  def create_admin(params) do
+  def create_admin!(params) do
     %User{}
     |> User.changeset(params)
     |> User.changeset_role(%{role: "admin"})
-    |> Repo.insert()
+    |> Repo.insert!()
   end
 
   @spec is_admin?(t()) :: boolean()

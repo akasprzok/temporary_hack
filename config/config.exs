@@ -13,7 +13,7 @@ config :temporary_hack,
 # Configures the endpoint
 config :temporary_hack, TemporaryHackWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "IqfOsS8C56gWaf47ajK/g68CCnD4d43UWI9kWB3ukDkHxKPZx2mV5eCezWijKCbC",
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [view: TemporaryHackWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: TemporaryHack.PubSub,
   live_view: [signing_salt: "fO5wVXfl"]

@@ -1,6 +1,7 @@
 defmodule TemporaryHack.Users.User do
   use Ecto.Schema
   use Pow.Ecto.Schema
+  use PowAssent.Ecto.Schema
 
   schema "users" do
     field :role, :string, null: false, default: "user"

@@ -7,6 +7,5 @@ defmodule TemporaryHack.Repo.Migrations.CreateClickers do
 
       timestamps()
     end
-
   end
 end

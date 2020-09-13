@@ -11,7 +11,8 @@
 # and so on) as they will fail if something goes wrong.
 alias TemporaryHack.Users
 
-Users.create_admin(%{
+Users.create_admin!(%{
   email: "admin@admin.com",
-  password: "adminadmin"
+  password: "adminadmin",
+  password_confirmation: "adminadmin"
 })

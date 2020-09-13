@@ -3,7 +3,11 @@ defmodule MyApp.UsersTest do
 
   alias TemporaryHack.{Repo, Users, Users.User}
 
-  @valid_params %{email: "test@example.com", password: "secret1234", password_confirmation: "secret1234"}
+  @valid_params %{
+    email: "test@example.com",
+    password: "secret1234",
+    password_confirmation: "secret1234"
+  }
 
   test "create_admin/2" do
     assert {:ok, user} = Users.create_admin(@valid_params)
@@ -18,5 +22,5 @@ defmodule MyApp.UsersTest do
 
     assert {:ok, admin} = Users.create_admin(%{@valid_params | email: "test2@example.com"})
     assert Users.is_admin?(admin)
- end
+  end
 end
