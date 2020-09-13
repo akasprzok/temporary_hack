@@ -75,6 +75,7 @@ defmodule TemporaryHackWeb.TaglineControllerTest do
     test "deletes chosen tagline", %{conn: conn, tagline: tagline} do
       conn = delete(conn, Routes.tagline_path(conn, :delete, tagline))
       assert redirected_to(conn) == Routes.tagline_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.tagline_path(conn, :show, tagline))
       end

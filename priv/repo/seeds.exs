@@ -1,14 +1,3 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     TemporaryHack.Repo.insert!(%TemporaryHack.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
 alias TemporaryHack.Users
 
 Users.create_admin!(%{
@@ -17,11 +6,36 @@ Users.create_admin!(%{
   password_confirmation: "adminadmin"
 })
 
+alias TemporaryHack.Blog
+
+{:ok, _} =
+  Blog.create_post(%{
+    title: "Hello World",
+    body: "ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn"
+  })
+
+{:ok, _} =
+  Blog.create_post(%{
+    title: "I am a blog post",
+    body:
+      "It is good to have an end to journey toward; but it is the journey that matters, in the end."
+  })
+
+{:ok, _} =
+  Blog.create_post(%{
+    title: "I am a long blog post",
+    body:
+      "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used before final copy is available, but it may also be used to temporarily replace copy in a process called greeking, which allows designers to consider form without the meaning of the text influencing the design.
+  Lorem ipsum is typically a corrupted version of De finibus bonorum et malorum, a first-century BC text by the Roman statesman and philosopher Cicero, with words altered, added, and removed to make it nonsensical, improper Latin.
+  Versions of the Lorem ipsum text have been used in typesetting at least since the 1960s, when it was popularized by advertisements for Letraset transfer sheets. Lorem ipsum was introduced to the digital world in the mid-1980s when Aldus employed it in graphic and word-processing templates for its desktop publishing program PageMaker. Other popular word processors including Pages and Microsoft Word have since adopted Lorem ipsum as well."
+  })
+
 alias TemporaryHack.Frontpage
+
 [
   "Click Me!",
-  "Now with less Java!",
-  "Functional Programming is neat!"
+  "Guaranteed Java-free!",
+  ""
 ]
 |> Enum.map(&%{text: &1})
 |> Enum.each(&Frontpage.create_tagline!/1)

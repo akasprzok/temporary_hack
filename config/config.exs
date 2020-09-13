@@ -16,7 +16,7 @@ config :temporary_hack, TemporaryHackWeb.Endpoint,
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [view: TemporaryHackWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: TemporaryHack.PubSub,
-  live_view: [signing_salt: "fO5wVXfl"]
+  live_view: [signing_salt: System.get_env("SIGNING_SALT")]
 
 # Configures Elixir's Logger
 config :logger, :console,

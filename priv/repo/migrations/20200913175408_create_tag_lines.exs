@@ -7,6 +7,5 @@ defmodule TemporaryHack.Repo.Migrations.CreateTagLines do
 
       timestamps()
     end
-
   end
 end

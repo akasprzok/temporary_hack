@@ -61,7 +61,6 @@ defmodule TemporaryHack.Frontpage do
     |> Repo.insert!()
   end
 
-
   @doc """
   Updates a tagline.
 
@@ -107,5 +106,28 @@ defmodule TemporaryHack.Frontpage do
   """
   def change_tagline(%Tagline{} = tagline, attrs \\ %{}) do
     Tagline.changeset(tagline, attrs)
+  end
+
+  @doc """
+  Returns a random tagline from the DB.
+  """
+  def random_tagline() do
+    Tagline
+    |> order_by(fragment("RANDOM()"))
+    |> limit(1)
+    |> Repo.all()
+    |> List.first()
+  end
+
+  @doc """
+  Returns a random tagline that is not the tagline passed as a parameter
+  """
+  def random_tagline(current_tagline) do
+    Tagline
+    |> order_by(fragment("RANDOM()"))
+    |> limit(1)
+    |> where([tagline], tagline.id != ^current_tagline.id)
+    |> Repo.all()
+    |> List.first()
   end
 end
