@@ -1,0 +1,13 @@
+<h1>Show Tagline</h1>
+
+<ul>
+
+  <li>
+    <strong>Text:</strong>
+    <%= @tagline.text %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.tagline_path(@conn, :edit, @tagline) %></span>
+<span><%= link "Back", to: Routes.tagline_path(@conn, :index) %></span>

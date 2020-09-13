@@ -53,6 +53,7 @@ defmodule TemporaryHackWeb.Router do
     pipe_through [:browser, :admin]
 
     live_dashboard "/dashboard", metrics: TemporaryHackWeb.Telemetry
+    resources "/tag_lines", TaglineController
   end
 
   scope "/", TemporaryHackWeb do

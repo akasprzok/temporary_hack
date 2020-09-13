@@ -16,3 +16,12 @@ Users.create_admin!(%{
   password: "adminadmin",
   password_confirmation: "adminadmin"
 })
+
+alias TemporaryHack.Frontpage
+[
+  "Click Me!",
+  "Now with less Java!",
+  "Functional Programming is neat!"
+]
+|> Enum.map(&%{text: &1})
+|> Enum.each(&Frontpage.create_tagline!/1)

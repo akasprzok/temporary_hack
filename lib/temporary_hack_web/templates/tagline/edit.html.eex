@@ -1,0 +1,5 @@
+<h1>Edit Tagline</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.tagline_path(@conn, :update, @tagline)) %>
+
+<span><%= link "Back", to: Routes.tagline_path(@conn, :index) %></span>
