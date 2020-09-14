@@ -61,12 +61,6 @@ defmodule TemporaryHackWeb.Router do
 
     live "/", PageLive, :index
     resources "/posts", PostController
-
-    live "/clickers", ClickerLive.Index, :index
-    live "/clickers/new", ClickerLive.Index, :new
-    live "/clickers/:id/edit", ClickerLive.Index, :edit
-
-    live "/clickers/:id", ClickerLive.Show, :show
-    live "/clickers/:id/show/edit", ClickerLive.Show, :edit
+    live "/counter", Counter
   end
 end

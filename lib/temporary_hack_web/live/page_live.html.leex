@@ -1,33 +1,35 @@
 <section class="phx-hero" phx-click="change_tagline">
   <h1>Welcome to Temporary Hack!</h1>
-    <p><%= @tagline.text %><p>
-</section>
-
-<section class="row">
-  <article class="column">
-    <h2>Blog</h2>
-    <%= for post <- @posts do %>
-      <article>
-        <h3><%= post.title %></h3>
-        <p><%= post.body %></p>
+  <p><%= @tagline.text %>
+    <p>
+    </section>
+    <section class="row">
+      <article class="column">
+        <h2><%= link "Blog", to: Routes.post_path(@socket, :index) %></h2>
+        <%= for post <- @posts do %>
+          <article>
+            <h3><%= link post.title, to: "/posts/#{post.id}" %></h3>
+            <p>
+              <%= post.body %>
+            </p>
+            </article>
+        <% end %>
       </article>
-    <% end %>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-      <li>
-        <a href="https://elixir-slackin.herokuapp.com/">Elixir on Slack</a>
-      </li>
-    </ul>
-  </article>
-</section>
+      <article class="column">
+        <h2>Demos</h2>
+        <ul>
+          <li>
+            <%= link "Counter", to: Routes.live_path(@socket, TemporaryHackWeb.Counter) %>
+          </li>
+        </ul>
+        <h2>@</h2>
+        <ul>
+          <li>
+            <a href="https://www.linkedin.com/in/akasprzok/">LinkedIn</a>
+          </li>
+          <li>
+            <a href="https://twitter.com/akasprzok">Twitter</a>
+          </li>
+        </ul>
+      </article>
+    </section>

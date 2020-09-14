@@ -6,7 +6,7 @@ defmodule TemporaryHackWeb.PageLive do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, tagline: Frontpage.random_tagline(), posts: Blog.list_posts())}
+    {:ok, assign(socket, tagline: Frontpage.random_tagline(), posts: Blog.get_stubs())}
   end
 
   @impl true

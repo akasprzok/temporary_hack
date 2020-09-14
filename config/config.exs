@@ -31,6 +31,15 @@ config :temporary_hack, :pow,
   repo: TemporaryHack.Repo,
   web_module: TemporaryHackWeb
 
+# Blog configuration
+config :temporary_hack, TemporaryHack.Blog,
+  # Max number of blog posts to list on the landing page
+  stubs: [
+    count: 5,
+    character_limit: 280
+  ]
+
+# The number of characters the body of the post is shortened to
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

@@ -8,6 +8,8 @@ defmodule TemporaryHack.Blog do
 
   alias TemporaryHack.Blog.Post
 
+  @stub_config Application.get_env(:temporary_hack, __MODULE__)[:stubs]
+
   @doc """
   Returns the list of posts.
 
@@ -19,6 +21,43 @@ defmodule TemporaryHack.Blog do
   """
   def list_posts do
     Repo.all(Post)
+  end
+
+  def get_stub_count do
+    :temporary_hack
+    |> Application.get_env(__MODULE__)
+    |> Keyword.fetch!(:stubs)
+    |> Keyword.fetch!(:count)
+  end
+
+  def get_stub_character_limit do
+    :temporary_hack
+    |> Application.get_env(__MODULE__)
+    |> Keyword.fetch!(:stubs)
+    |> Keyword.fetch!(:character_limit)
+  end
+
+  def get_stubs do
+    IO.inspect(@stub_config)
+
+    query =
+      from Post,
+        order_by: [asc: :inserted_at],
+        limit: ^get_stub_count()
+
+    Repo.all(query)
+    |> Enum.map(fn post -> post_to_stub(post) end)
+  end
+
+  def post_to_stub(%Post{} = post) do
+    character_limit = get_stub_character_limit()
+
+    if String.length(post.body) > character_limit do
+      post
+      |> struct(body: String.slice(post.body, 0, character_limit - 3) <> "...")
+    else
+      post
+    end
   end
 
   @doc """
