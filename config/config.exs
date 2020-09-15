@@ -19,9 +19,13 @@ config :temporary_hack, TemporaryHackWeb.Endpoint,
   live_view: [signing_salt: System.get_env("SIGNING_SALT")]
 
 # Configures Elixir's Logger
+config :logger,
+  backends: [:console],
+  compile_time_purge_level: :debug
+
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+  metadata: :all
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
