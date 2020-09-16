@@ -1,4 +1,7 @@
 defmodule TemporaryHack.Frontpage.Tagline do
+  @moduledoc """
+  Schema for taglines.  Currently used on the landing page.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

@@ -1,4 +1,7 @@
 defmodule TemporaryHackWeb.Counter do
+  @moduledoc """
+  Very simple LiveView that increments or decrements an integer.
+  """
   use Phoenix.LiveView
 
   @topic "live"

@@ -1,4 +1,7 @@
 defmodule TemporaryHack.Blog.Post do
+  @moduledoc """
+  Schema for blog post.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

@@ -1,4 +1,4 @@
-defmodule MyApp.UsersTest do
+defmodule TemporaryHack.UsersTest do
   use TemporaryHack.DataCase
 
   alias TemporaryHack.{Repo, Users, Users.User}
@@ -9,8 +9,8 @@ defmodule MyApp.UsersTest do
     password_confirmation: "secret1234"
   }
 
-  test "create_admin/2" do
-    assert {:ok, user} = Users.create_admin(@valid_params)
+  test "create_admin!/2" do
+    user = Users.create_admin!(@valid_params)
     assert user.role == "admin"
   end
 
@@ -20,7 +20,7 @@ defmodule MyApp.UsersTest do
     assert {:ok, user} = Repo.insert(User.changeset(%User{}, @valid_params))
     refute Users.is_admin?(user)
 
-    assert {:ok, admin} = Users.create_admin(%{@valid_params | email: "test2@example.com"})
+    admin = Users.create_admin!(%{@valid_params | email: "test2@example.com"})
     assert Users.is_admin?(admin)
   end
 end

@@ -1,4 +1,7 @@
 defmodule TemporaryHack.Users do
+  @moduledoc """
+  User stuff.
+  """
   alias TemporaryHack.{Repo, Users.User}
 
   @type t :: %User{}
@@ -7,6 +10,13 @@ defmodule TemporaryHack.Users do
     %User{}
     |> User.changeset(params)
     |> User.changeset_role(%{role: "admin"})
+    |> Repo.insert!()
+  end
+
+  def create_user(params) do
+    %User{}
+    |> User.changeset(params)
+    |> User.changeset_role(%{role: "user"})
     |> Repo.insert!()
   end
 

@@ -1,4 +1,9 @@
 defmodule TemporaryHackWeb.PageLive do
+  @moduledoc """
+  LiveView of the landing page.
+  Currently displays a small number of blog stubs, and a tagline.
+  The tagline changes when the banner is clicked.
+  """
   use TemporaryHackWeb, :live_view
 
   alias TemporaryHack.Blog

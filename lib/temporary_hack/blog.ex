@@ -38,8 +38,6 @@ defmodule TemporaryHack.Blog do
   end
 
   def get_stubs do
-    IO.inspect(@stub_config)
-
     query =
       from Post,
         order_by: [asc: :inserted_at],

@@ -1,4 +1,15 @@
 defmodule TemporaryHackWeb.EnsureRolePlug do
+  @moduledoc """
+  This plug ensures that a user has a particular role.
+
+  ## Example
+
+      plug MyAppWeb.EnsureRolePlug, [:user, :admin]
+
+      plug MyAppWeb.EnsureRolePlug, :admin
+
+      plug MyAppWeb.EnsureRolePlug, ~w(user admin)a
+  """
   import Plug.Conn, only: [halt: 1]
 
   alias TemporaryHackWeb.Router.Helpers, as: Routes

@@ -1,4 +1,7 @@
 defmodule TemporaryHackWeb.LiveHelpers do
+  @moduledoc """
+  LiveView boilerplate stuff
+  """
   import Phoenix.LiveView.Helpers
 
   def live_modal(socket, component, opts) do

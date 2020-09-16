@@ -1,4 +1,7 @@
 defmodule TemporaryHackWeb.ModalComponent do
+  @moduledoc """
+  LiveView boilerplate stuff
+  """
   use TemporaryHackWeb, :live_component
 
   @impl true

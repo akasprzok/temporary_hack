@@ -6,6 +6,12 @@ Users.create_admin!(%{
   password_confirmation: "adminadmin"
 })
 
+Users.create_user(%{
+  email: "user@user.com",
+  password: "useruser",
+  password_confirmation: "useruser"
+})
+
 alias TemporaryHack.Blog
 
 {:ok, _} =
@@ -35,7 +41,8 @@ alias TemporaryHack.Frontpage
 [
   "Click Me!",
   "Guaranteed Java-free!",
-  ""
+  "Yeet!",
+  "Built with Elixir and Phoenix"
 ]
 |> Enum.map(&%{text: &1})
 |> Enum.each(&Frontpage.create_tagline!/1)

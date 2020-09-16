@@ -1,4 +1,7 @@
 defmodule TemporaryHack.Users.User do
+  @moduledoc """
+  Schema used for authentication and authorization of users.
+  """
   use Ecto.Schema
   use Pow.Ecto.Schema
   use PowAssent.Ecto.Schema

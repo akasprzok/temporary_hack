@@ -1,11 +1,17 @@
 defmodule TemporaryHackWeb.TaglineControllerTest do
-  use TemporaryHackWeb.ConnCase
+  use TemporaryHackWeb.ConnCase, async: true
 
   alias TemporaryHack.Frontpage
+  alias TemporaryHackWeb.AuthHelper
 
   @create_attrs %{text: "some text"}
   @update_attrs %{text: "some updated text"}
   @invalid_attrs %{text: nil}
+
+  setup %{conn: conn} do
+    authed_conn = AuthHelper.sign_in_admin(conn)
+    {:ok, authed_conn: authed_conn}
+  end
 
   def fixture(:tagline) do
     {:ok, tagline} = Frontpage.create_tagline(@create_attrs)
@@ -13,32 +19,32 @@ defmodule TemporaryHackWeb.TaglineControllerTest do
   end
 
   describe "index" do
-    test "lists all tag_lines", %{conn: conn} do
-      conn = get(conn, Routes.tagline_path(conn, :index))
+    test "lists all tag_lines", %{authed_conn: authed_conn} do
+      conn = get(authed_conn, Routes.tagline_path(authed_conn, :index))
       assert html_response(conn, 200) =~ "Listing Tag lines"
     end
   end
 
   describe "new tagline" do
-    test "renders form", %{conn: conn} do
-      conn = get(conn, Routes.tagline_path(conn, :new))
+    test "renders form", %{authed_conn: authed_conn} do
+      conn = get(authed_conn, Routes.tagline_path(authed_conn, :new))
       assert html_response(conn, 200) =~ "New Tagline"
     end
   end
 
   describe "create tagline" do
-    test "redirects to show when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.tagline_path(conn, :create), tagline: @create_attrs)
+    test "redirects to show when data is valid", %{authed_conn: authed_conn} do
+      conn = post(authed_conn, Routes.tagline_path(authed_conn, :create), tagline: @create_attrs)
 
       assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == Routes.tagline_path(conn, :show, id)
+      assert redirected_to(conn) == Routes.tagline_path(authed_conn, :show, id)
 
-      conn = get(conn, Routes.tagline_path(conn, :show, id))
+      conn = get(authed_conn, Routes.tagline_path(authed_conn, :show, id))
       assert html_response(conn, 200) =~ "Show Tagline"
     end
 
-    test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, Routes.tagline_path(conn, :create), tagline: @invalid_attrs)
+    test "renders errors when data is invalid", %{authed_conn: authed_conn} do
+      conn = post(authed_conn, Routes.tagline_path(authed_conn, :create), tagline: @invalid_attrs)
       assert html_response(conn, 200) =~ "New Tagline"
     end
   end
@@ -46,8 +52,8 @@ defmodule TemporaryHackWeb.TaglineControllerTest do
   describe "edit tagline" do
     setup [:create_tagline]
 
-    test "renders form for editing chosen tagline", %{conn: conn, tagline: tagline} do
-      conn = get(conn, Routes.tagline_path(conn, :edit, tagline))
+    test "renders form for editing chosen tagline", %{authed_conn: authed_conn, tagline: tagline} do
+      conn = get(authed_conn, Routes.tagline_path(authed_conn, :edit, tagline))
       assert html_response(conn, 200) =~ "Edit Tagline"
     end
   end
@@ -55,16 +61,24 @@ defmodule TemporaryHackWeb.TaglineControllerTest do
   describe "update tagline" do
     setup [:create_tagline]
 
-    test "redirects when data is valid", %{conn: conn, tagline: tagline} do
-      conn = put(conn, Routes.tagline_path(conn, :update, tagline), tagline: @update_attrs)
-      assert redirected_to(conn) == Routes.tagline_path(conn, :show, tagline)
+    test "redirects when data is valid", %{authed_conn: authed_conn, tagline: tagline} do
+      conn =
+        put(authed_conn, Routes.tagline_path(authed_conn, :update, tagline),
+          tagline: @update_attrs
+        )
 
-      conn = get(conn, Routes.tagline_path(conn, :show, tagline))
+      assert redirected_to(conn) == Routes.tagline_path(authed_conn, :show, tagline)
+
+      conn = get(authed_conn, Routes.tagline_path(authed_conn, :show, tagline))
       assert html_response(conn, 200) =~ "some updated text"
     end
 
-    test "renders errors when data is invalid", %{conn: conn, tagline: tagline} do
-      conn = put(conn, Routes.tagline_path(conn, :update, tagline), tagline: @invalid_attrs)
+    test "renders errors when data is invalid", %{authed_conn: authed_conn, tagline: tagline} do
+      conn =
+        put(authed_conn, Routes.tagline_path(authed_conn, :update, tagline),
+          tagline: @invalid_attrs
+        )
+
       assert html_response(conn, 200) =~ "Edit Tagline"
     end
   end
@@ -72,12 +86,12 @@ defmodule TemporaryHackWeb.TaglineControllerTest do
   describe "delete tagline" do
     setup [:create_tagline]
 
-    test "deletes chosen tagline", %{conn: conn, tagline: tagline} do
-      conn = delete(conn, Routes.tagline_path(conn, :delete, tagline))
-      assert redirected_to(conn) == Routes.tagline_path(conn, :index)
+    test "deletes chosen tagline", %{authed_conn: authed_conn, tagline: tagline} do
+      conn = delete(authed_conn, Routes.tagline_path(authed_conn, :delete, tagline))
+      assert redirected_to(conn) == Routes.tagline_path(authed_conn, :index)
 
       assert_error_sent 404, fn ->
-        get(conn, Routes.tagline_path(conn, :show, tagline))
+        get(authed_conn, Routes.tagline_path(authed_conn, :show, tagline))
       end
     end
   end
