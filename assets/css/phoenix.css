@@ -19,7 +19,7 @@ pre{padding: 1em;}
 
 .container{
   margin: 0 auto;
-  max-width: 80.0rem;
+  max-width: 120.0rem;
   padding: 0 2.0rem;
   position: relative;
   width: 100%
@@ -87,7 +87,7 @@ header nav a {
   display: block;
 }
 
-@media (min-width: 40.0rem) { /* Small devices (landscape phones, 576px and up) */
+@media (min-width: 60.0rem) { /* Small devices (landscape phones, 576px and up) */
   header section {
     flex-direction: row;
   }

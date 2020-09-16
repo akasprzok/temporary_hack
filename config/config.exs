@@ -20,8 +20,7 @@ config :temporary_hack, TemporaryHackWeb.Endpoint,
 
 # Configures Elixir's Logger
 config :logger,
-  backends: [:console],
-  compile_time_purge_level: :debug
+  backends: [:console]
 
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

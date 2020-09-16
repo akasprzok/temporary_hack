@@ -2,6 +2,18 @@
 @import "./phoenix.css";
 @import "../node_modules/nprogress/nprogress.css";
 
+/* Random stuff */
+a {
+  color: inherit
+}
+
+.remove_link_color {
+  a, a:hover, a:focus, a:active {
+      color: inherit;
+      text-decoration: none;
+  }
+}
+
 /* LiveView specific classes for your customizations */
 .phx-no-feedback.invalid-feedback,
 .phx-no-feedback .invalid-feedback {
