@@ -8,8 +8,6 @@ defmodule TemporaryHack.Blog do
 
   alias TemporaryHack.Blog.Post
 
-  @stub_config Application.get_env(:temporary_hack, __MODULE__)[:stubs]
-
   @doc """
   Returns the list of posts.
 
