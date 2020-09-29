@@ -12,10 +12,13 @@ defmodule TemporaryHackWeb.PageLiveTest do
 
   setup do
     {:ok, _} = Frontpage.create_tagline(%{text: @tagline})
-    {:ok, _} = Blog.create_post(%{
-      title: @post_title,
-      body: @post_body
-    })
+
+    {:ok, _} =
+      Blog.create_post(%{
+        title: @post_title,
+        body: @post_body
+      })
+
     :ok
   end
 
@@ -27,5 +30,4 @@ defmodule TemporaryHackWeb.PageLiveTest do
     assert rendered_html =~ @post_title
     assert rendered_html =~ @post_body
   end
-
 end

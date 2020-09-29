@@ -62,5 +62,12 @@ defmodule TemporaryHackWeb.Router do
     live "/", PageLive, :index
     resources "/posts", PostController
     live "/counter", Counter
+
+    live "/pro_con_lists", ProConListLive.Index, :index
+    live "/pro_con_lists/new", ProConListLive.Index, :new
+    live "/pro_con_lists/:id/edit", ProConListLive.Index, :edit
+
+    live "/pro_con_lists/:id", ProConListLive.Show, :show
+    live "/pro_con_lists/:id/show/edit", ProConListLive.Show, :edit
   end
 end

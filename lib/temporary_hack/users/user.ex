@@ -20,4 +20,18 @@ defmodule TemporaryHack.Users.User do
     |> Ecto.Changeset.cast(attrs, [:role])
     |> Ecto.Changeset.validate_inclusion(:role, ~w(user admin))
   end
+
+  def changeset(user_or_changeset, attrs) do
+    user_or_changeset
+    |> Ecto.Changeset.cast(attrs, [:role])
+    |> Ecto.Changeset.validate_inclusion(:role, ~w(user admin))
+    |> pow_changeset(attrs)
+  end
+
+  def user_identity_changeset(user_or_changeset, user_identity, attrs, user_id_attrs) do
+    user_or_changeset
+    |> Ecto.Changeset.cast(attrs, [:role])
+    |> Ecto.Changeset.validate_inclusion(:role, ~w(user admin))
+    |> pow_assent_user_identity_changeset(user_identity, attrs, user_id_attrs)
+  end
 end

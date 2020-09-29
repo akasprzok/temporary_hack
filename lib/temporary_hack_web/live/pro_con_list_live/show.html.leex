@@ -1,0 +1,22 @@
+<h1>Show Pro con list</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, TemporaryHackWeb.ProConListLive.FormComponent,
+    id: @pro_con_list.id,
+    title: @page_title,
+    action: @live_action,
+    pro_con_list: @pro_con_list,
+    return_to: Routes.pro_con_list_show_path(@socket, :show, @pro_con_list) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @pro_con_list.title %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.pro_con_list_show_path(@socket, :edit, @pro_con_list), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.pro_con_list_index_path(@socket, :index) %></span>
