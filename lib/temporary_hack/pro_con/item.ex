@@ -1,11 +1,14 @@
-defmodule TemporaryHack.ProCon.Item do
+defmodule TemporaryHack.ProCon.ProConItem do
   use Ecto.Schema
   import Ecto.Changeset
+
+  @types ~w(pro con)
 
   schema "pro_con_items" do
     field :name, :string
     field :weight, :integer
-    belongs_to :list, TemporaryHack.ProCon.List
+    field :type, :string, null: false
+    belongs_to :pro_con_list, TemporaryHack.ProCon.ProConList
 
     timestamps()
   end
@@ -13,7 +16,9 @@ defmodule TemporaryHack.ProCon.Item do
   @doc false
   def changeset(pro_con_item, attrs) do
     pro_con_item
-    |> cast(attrs, [:name, weight])
-    |> validate_required([:name, weight])
+    |> cast(attrs, [:name, :weight, :pro_con_list_id, :type])
+    |> validate_required([:name, :weight, :pro_con_list_id, :type])
+    |> validate_inclusion(:type, @types)
+    |> assoc_constraint(:pro_con_list)
   end
 end

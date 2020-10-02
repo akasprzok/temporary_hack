@@ -4,11 +4,7 @@ defmodule TemporaryHack.Repo.Migrations.CreateProConLists do
   def change do
     create table(:pro_con_lists) do
       add :title, :string
-
-      has_many(
-        :pros,
-        timestamps()
-      )
+      timestamps()
     end
   end
 end

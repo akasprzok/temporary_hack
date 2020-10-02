@@ -1,11 +1,10 @@
-defmodule TemporaryHack.ProCon.List do
+defmodule TemporaryHack.ProCon.ProConList do
   use Ecto.Schema
   import Ecto.Changeset
 
   schema "pro_con_lists" do
     field :title, :string
-    has_many :pros, TemporaryHack.ProCon.Item
-    has_many :cons, TemporaryHack.ProCon.Item
+    has_many :pro_con_items, TemporaryHack.ProCon.ProConItem
 
     timestamps()
   end
@@ -15,7 +14,6 @@ defmodule TemporaryHack.ProCon.List do
     list
     |> cast(attrs, [:title])
     |> validate_required([:title])
-    |> cast_assoc(:pros, required: false)
-    |> cast_assoc(:cons, required: false)
+    |> cast_assoc(:pro_con_items, required: false)
   end
 end

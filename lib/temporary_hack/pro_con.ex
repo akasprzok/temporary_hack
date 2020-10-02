@@ -7,6 +7,7 @@ defmodule TemporaryHack.ProCon do
   alias TemporaryHack.Repo
 
   alias TemporaryHack.ProCon.ProConList
+  alias TemporaryHack.ProCon.ProConItem
 
   @doc """
   Returns the list of pro_con_lists.
@@ -35,7 +36,10 @@ defmodule TemporaryHack.ProCon do
       ** (Ecto.NoResultsError)
 
   """
-  def get_pro_con_list!(id), do: Repo.get!(ProConList, id)
+  def get_pro_con_list!(id) do
+   Repo.get!(ProConList, id)
+   |> Repo.preload([:pro_con_items])
+  end
 
   @doc """
   Creates a pro_con_list.
@@ -100,5 +104,11 @@ defmodule TemporaryHack.ProCon do
   """
   def change_pro_con_list(%ProConList{} = pro_con_list, attrs \\ %{}) do
     ProConList.changeset(pro_con_list, attrs)
+  end
+
+  def insert_item(params) do
+    %ProConItem{}
+    |> ProConItem.changeset(params)
+    |> Repo.insert()
   end
 end

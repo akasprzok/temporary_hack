@@ -46,3 +46,13 @@ alias TemporaryHack.Frontpage
 ]
 |> Enum.map(&%{text: &1})
 |> Enum.each(&Frontpage.create_tagline!/1)
+
+alias TemporaryHack.ProCon
+
+{:ok, pro_con_list} = ProCon.create_pro_con_list(%{title: "Denver?"})
+{:ok, _pro} = ProCon.insert_item(%{
+  pro_con_list_id: pro_con_list.id,
+  type: "pro",
+  weight: 3,
+  name: "Cuyler and Seth"
+})
