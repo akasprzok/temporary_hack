@@ -1,4 +1,4 @@
-<h1>Show Pro con list</h1>
+<h1><%= @pro_con_list.title %></h1> <span><%= live_patch "Edit", to: Routes.pro_con_list_show_path(@socket, :edit, @pro_con_list), class: "button" %></span>
 
 <%= if @live_action in [:edit] do %>
   <%= live_modal @socket, TemporaryHackWeb.ProConListLive.FormComponent,
@@ -9,14 +9,25 @@
     return_to: Routes.pro_con_list_show_path(@socket, :show, @pro_con_list) %>
 <% end %>
 
-<ul>
+<section class="row">
+  <section class="column">
+    <ul>
+    <%= for pro <- Enum.filter(@pro_con_list.pro_con_items, fn item -> item.type == "pro" end) do %>
+    <li>
+      <%= pro.name %> <span class="float-right"><%= pro.weight %></span>
+    </li>
+    <% end %>
+    </ul>
+  </section>
+  <section class="column">
+    <ul>
+    <%= for con <- Enum.filter(@pro_con_list.pro_con_items, fn item -> item.type == "con" end) do %>
+    <li>
+      <%= con.name %> <%= con.weight %>
+    </li>
+    <% end %>
+    </ul>
+  </section>
+</section>
 
-  <li>
-    <strong>Title:</strong>
-    <%= @pro_con_list.title %>
-  </li>
-
-</ul>
-
-<span><%= live_patch "Edit", to: Routes.pro_con_list_show_path(@socket, :edit, @pro_con_list), class: "button" %></span>
 <span><%= live_redirect "Back", to: Routes.pro_con_list_index_path(@socket, :index) %></span>

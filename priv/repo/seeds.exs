@@ -50,9 +50,19 @@ alias TemporaryHack.Frontpage
 alias TemporaryHack.ProCon
 
 {:ok, pro_con_list} = ProCon.create_pro_con_list(%{title: "Denver?"})
-{:ok, _pro} = ProCon.insert_item(%{
-  pro_con_list_id: pro_con_list.id,
-  type: "pro",
-  weight: 3,
-  name: "Cuyler and Seth"
-})
+
+{:ok, _pro} =
+  ProCon.insert_item(%{
+    pro_con_list_id: pro_con_list.id,
+    type: "pro",
+    weight: 3,
+    name: "Cuyler and Seth"
+  })
+
+{:ok, _con} =
+  ProCon.insert_item(%{
+    pro_con_list_id: pro_con_list.id,
+    type: "con",
+    weight: 2,
+    name: "Landlocked"
+  })

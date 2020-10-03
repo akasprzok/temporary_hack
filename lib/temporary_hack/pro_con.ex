@@ -37,8 +37,8 @@ defmodule TemporaryHack.ProCon do
 
   """
   def get_pro_con_list!(id) do
-   Repo.get!(ProConList, id)
-   |> Repo.preload([:pro_con_items])
+    Repo.get!(ProConList, id)
+    |> Repo.preload([:pro_con_items])
   end
 
   @doc """
@@ -110,5 +110,13 @@ defmodule TemporaryHack.ProCon do
     %ProConItem{}
     |> ProConItem.changeset(params)
     |> Repo.insert()
+  end
+
+  def get_pros(%ProConList{} = pro_con_list) do
+    Enum.filter(pro_con_list.pro_con_items, fn item -> %ProConItem{type: "pro"} == item end)
+  end
+
+  def get_cons(%ProConList{} = pro_con_list) do
+    Enum.filter(pro_con_list.pro_con_items, fn item -> %ProConItem{type: "con"} == item end)
   end
 end
