@@ -9,17 +9,16 @@ defmodule TemporaryHackWeb.ProConListLive.Show do
   end
 
   @impl true
-  def handle_params(%{"id" => id}, _, socket) do
-    pro_con_list = ProCon.get_pro_con_list!(id) |> IO.inspect()
-    pros = ProCon.get_pros(pro_con_list)
-    cons = ProCon.get_cons(pro_con_list)
+  def handle_params(params, _url, socket) do
+    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+  end
 
-    {:noreply,
-     socket
-     |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:pro_con_list, pro_con_list)
-     |> assign(:pros, pros)
-     |> assign(:cons, cons)}
+  defp apply_action(socket, :show, %{"id" => id}) do
+    pro_con_list = ProCon.get_pro_con_list!(id) |> IO.inspect()
+
+    socket
+    |> assign(:page_title, page_title(socket.assigns.live_action))
+    |> assign(:pro_con_list, pro_con_list)
   end
 
   defp page_title(:show), do: "Show Pro con list"

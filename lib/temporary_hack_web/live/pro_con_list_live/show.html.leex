@@ -1,4 +1,4 @@
-<h1><%= @pro_con_list.title %></h1> <span><%= live_patch "Edit", to: Routes.pro_con_list_show_path(@socket, :edit, @pro_con_list), class: "button" %></span>
+<h1><%= @pro_con_list.title %></h1>
 
 <%= if @live_action in [:edit] do %>
   <%= live_modal @socket, TemporaryHackWeb.ProConListLive.FormComponent,
@@ -11,23 +11,34 @@
 
 <section class="row">
   <section class="column">
-    <ul>
-    <%= for pro <- Enum.filter(@pro_con_list.pro_con_items, fn item -> item.type == "pro" end) do %>
-    <li>
-      <%= pro.name %> <span class="float-right"><%= pro.weight %></span>
-    </li>
-    <% end %>
-    </ul>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Weight</th>
+      </tr>
+      <%= for pro <- Enum.filter(@pro_con_list.pro_con_items, fn item -> item.type == "pro" end) do %>
+        <tr>
+          <td><%= pro.name %></td>
+          <td><%= pro.weight %></td>
+        </tr>
+      <% end %>
+    </table>
+  <%= live_patch "Add Pro", to: Routes.pro_con_list_show_path(@socket, :edit, @pro_con_list), class: "button" %>
   </section>
   <section class="column">
-    <ul>
-    <%= for con <- Enum.filter(@pro_con_list.pro_con_items, fn item -> item.type == "con" end) do %>
-    <li>
-      <%= con.name %> <%= con.weight %>
-    </li>
-    <% end %>
-    </ul>
+    <table>
+      <tr>
+        <th>Weight</th>
+        <th>Name</th>
+      </tr>
+      <%= for con <- Enum.filter(@pro_con_list.pro_con_items, fn item -> item.type == "con" end) do %>
+        <tr>
+          <td><%= con.weight %></td>
+          <td><%= con.name %></td>
+        </tr>
+      <% end %>
+    </table>
   </section>
 </section>
-
+ <span><%= live_patch "Edit", to: Routes.pro_con_list_show_path(@socket, :edit, @pro_con_list), class: "button" %></span>
 <span><%= live_redirect "Back", to: Routes.pro_con_list_index_path(@socket, :index) %></span>
