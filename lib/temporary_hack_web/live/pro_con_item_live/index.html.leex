@@ -1,0 +1,37 @@
+<h1>Listing Pro con items</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, TemporaryHackWeb.ProConItemLive.FormComponent,
+    id: @pro_con_item.id || :new,
+    title: @page_title,
+    action: @live_action,
+    pro_con_item: @pro_con_item,
+    return_to: Routes.pro_con_item_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Weight</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="pro_con_items">
+    <%= for pro_con_item <- @pro_con_items do %>
+      <tr id="pro_con_item-<%= pro_con_item.id %>">
+        <td><%= pro_con_item.name %></td>
+        <td><%= pro_con_item.weight %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.pro_con_item_show_path(@socket, :show, pro_con_item) %></span>
+          <span><%= live_patch "Edit", to: Routes.pro_con_item_index_path(@socket, :edit, pro_con_item) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: pro_con_item.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Pro con item", to: Routes.pro_con_item_index_path(@socket, :new) %></span>

@@ -69,5 +69,13 @@ defmodule TemporaryHackWeb.Router do
 
     live "/pro_con_lists/:id", ProConListLive.Show, :show
     live "/pro_con_lists/:id/show/edit", ProConListLive.Show, :edit
+
+    live "/pro_con_items", ProConItemLive.Index, :index
+    live "/pro_con_items/new", ProConItemLive.Index, :new
+    live "/pro_con_items/:id/edit", ProConItemLive.Index, :edit
+
+    live "/pro_con_items/:id", ProConItemLive.Show, :show
+    live "/pro_con_items/:id/show/edit", ProConItemLive.Show, :edit
+
   end
 end

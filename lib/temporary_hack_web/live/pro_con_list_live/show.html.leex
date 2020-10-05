@@ -23,21 +23,21 @@
         </tr>
       <% end %>
     </table>
-  <%= live_patch "Add Pro", to: Routes.pro_con_list_show_path(@socket, :edit, @pro_con_list), class: "button" %>
   </section>
   <section class="column">
     <table>
       <tr>
-        <th>Weight</th>
         <th>Name</th>
+        <th>Weight</th>
       </tr>
       <%= for con <- Enum.filter(@pro_con_list.pro_con_items, fn item -> item.type == "con" end) do %>
         <tr>
-          <td><%= con.weight %></td>
           <td><%= con.name %></td>
+          <td><%= con.weight %></td>
         </tr>
       <% end %>
     </table>
+    <%= live_patch "Add Pro", to: Routes.pro_con_item_index_path(@socket, :new, @pro_con_list) %>
   </section>
 </section>
  <span><%= live_patch "Edit", to: Routes.pro_con_list_show_path(@socket, :edit, @pro_con_list), class: "button" %></span>

@@ -10,5 +10,6 @@ defmodule TemporaryHack.Repo.Migrations.CreateProConItems do
 
       timestamps()
     end
+
   end
 end

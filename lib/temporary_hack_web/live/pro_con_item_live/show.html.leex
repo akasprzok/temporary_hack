@@ -1,0 +1,27 @@
+<h1>Show Pro con item</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, TemporaryHackWeb.ProConItemLive.FormComponent,
+    id: @pro_con_item.id,
+    title: @page_title,
+    action: @live_action,
+    pro_con_item: @pro_con_item,
+    return_to: Routes.pro_con_item_show_path(@socket, :show, @pro_con_item) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @pro_con_item.name %>
+  </li>
+
+  <li>
+    <strong>Weight:</strong>
+    <%= @pro_con_item.weight %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.pro_con_item_show_path(@socket, :edit, @pro_con_item), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.pro_con_item_index_path(@socket, :index) %></span>

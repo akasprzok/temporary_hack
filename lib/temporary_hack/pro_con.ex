@@ -106,9 +106,99 @@ defmodule TemporaryHack.ProCon do
     ProConList.changeset(pro_con_list, attrs)
   end
 
-  def insert_item(params) do
+  alias TemporaryHack.ProCon.ProConItem
+
+  @doc """
+  Returns the list of pro_con_items.
+
+  ## Examples
+
+      iex> list_pro_con_items()
+      [%ProConItem{}, ...]
+
+  """
+  def list_pro_con_items do
+    Repo.all(ProConItem)
+  end
+
+  @doc """
+  Gets a single pro_con_item.
+
+  Raises `Ecto.NoResultsError` if the Pro con item does not exist.
+
+  ## Examples
+
+      iex> get_pro_con_item!(123)
+      %ProConItem{}
+
+      iex> get_pro_con_item!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_pro_con_item!(id), do: Repo.get!(ProConItem, id)
+
+  @doc """
+  Creates a pro_con_item.
+
+  ## Examples
+
+      iex> create_pro_con_item(%{field: value})
+      {:ok, %ProConItem{}}
+
+      iex> create_pro_con_item(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_pro_con_item(attrs \\ %{}) do
     %ProConItem{}
-    |> ProConItem.changeset(params)
+    |> ProConItem.changeset(attrs)
     |> Repo.insert()
+  end
+
+  @doc """
+  Updates a pro_con_item.
+
+  ## Examples
+
+      iex> update_pro_con_item(pro_con_item, %{field: new_value})
+      {:ok, %ProConItem{}}
+
+      iex> update_pro_con_item(pro_con_item, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_pro_con_item(%ProConItem{} = pro_con_item, attrs) do
+    pro_con_item
+    |> ProConItem.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a pro_con_item.
+
+  ## Examples
+
+      iex> delete_pro_con_item(pro_con_item)
+      {:ok, %ProConItem{}}
+
+      iex> delete_pro_con_item(pro_con_item)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_pro_con_item(%ProConItem{} = pro_con_item) do
+    Repo.delete(pro_con_item)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking pro_con_item changes.
+
+  ## Examples
+
+      iex> change_pro_con_item(pro_con_item)
+      %Ecto.Changeset{data: %ProConItem{}}
+
+  """
+  def change_pro_con_item(%ProConItem{} = pro_con_item, attrs \\ %{}) do
+    ProConItem.changeset(pro_con_item, attrs)
   end
 end
