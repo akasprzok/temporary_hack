@@ -2,6 +2,7 @@ name: 'main'
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  MIX_ENV: test
 
 on:
   push:
@@ -54,19 +55,11 @@ jobs:
       - name: Format
         run: mix format --check-formatted
       - name: Compiler warnings
-        env:
-          MIX_ENV: test
         run: mix compile --warnings-as-errors
       - name: Credo strict
         run: mix credo --strict
       - name: ecto setup
-        env:
-          MIX_ENV: test
-          POSTGRES_HOST: localhost
         run: mix ecto.setup
       - name: tests
-        env:
-          MIX_ENV: test
-          POSTGRES_HOST: postgres
         run: mix test
     
