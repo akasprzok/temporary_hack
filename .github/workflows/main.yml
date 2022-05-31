@@ -10,43 +10,17 @@ on:
     branches: [ main ]
 
 jobs:
-  analysis:
-    name: Code Analysis
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Elixir/Erlang Setup
-        uses: erlef/setup-elixir@v1
-        with:
-          elixir-version: '1.13.4'
-          otp-version: '25.0'
-      - name: Restore deps cache
-        uses: actions/cache@v3
-        with:
-          path: deps
-          key: ${{ runner.os }}-mix-v2-${{ hashFiles('**/mix.lock') }}
-          restore-keys: ${{ runner.os }}-mix-v2-
-      - name: Install deps
-        run: mix deps.get
-      - name: Format
-        run: mix format --check-formatted
-      - name: Compiler warnings
-        run: mix compile --warnings-as-errors
-      - name: Credo strict
-        run: mix credo --strict
-  
-  unit_test:
+  main:
     name: Unit tests
     runs-on: ubuntu-latest
 
     services:
-      postgres:
+      db:
         image: postgres
         ports:
           - '5432:5432'
         env:
+          POSTGRES_USERNAME: postgres
           POSTGRES_PASSWORD: postgres
         options: >-
           --health-cmd pg_isready
@@ -77,11 +51,19 @@ jobs:
           restore-keys: ${{ runner.os }}-mix-v2-
       - name: Install deps
         run: mix deps.get
+      - name: Format
+        run: mix format --check-formatted
+      - name: Compiler warnings
+        env:
+          MIX_ENV: test
+        run: mix compile --warnings-as-errors
+      - name: Credo strict
+        run: mix credo --strict
       - name: ecto setup
         env:
           MIX_ENV: test
-          POSTGRES_HOST: postgres
-        run: mix ecto.create
+          POSTGRES_HOST: localhost
+        run: mix ecto.setup
       - name: tests
         env:
           MIX_ENV: test
