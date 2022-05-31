@@ -8,6 +8,7 @@ defmodule TemporaryHack.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      {LogfmtEx, Application.get_env(:logfmt_ex, :opts)},
       # Start the Ecto repository
       TemporaryHack.Repo,
       # Start the Telemetry supervisor
