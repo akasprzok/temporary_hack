@@ -7,6 +7,27 @@
 # General application configuration
 import Config
 
+if Mix.env() != :prod do
+  config :git_hooks,
+    auto_install: true,
+    verbose: true,
+    hooks: [
+      pre_commit: [
+        tasks: [
+          {:mix_task, :format}
+        ]
+      ],
+      pre_push: [
+        tasks: [
+          {:cmd, "mix compile --warnings-as-errors"},
+          {:mix_task, :credo, ["--strict"]},
+          {:mix_task, :test},
+          {:mix_task, :format, ["--check-formatted"]}
+        ]
+      ]
+    ]
+end
+
 config :temporary_hack,
   ecto_repos: [TemporaryHack.Repo]
 
