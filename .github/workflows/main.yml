@@ -52,14 +52,13 @@ jobs:
           restore-keys: ${{ runner.os }}-mix-v2-
       - name: Install deps
         run: mix deps.get
-      - name: Format
-        run: mix format --check-formatted
       - name: Compiler warnings
         run: mix compile --warnings-as-errors
+      - name: Format
+        run: mix format --check-formatted
       - name: Credo strict
         run: mix credo --strict
       - name: ecto setup
         run: mix ecto.setup
       - name: tests
         run: mix test
-    
