@@ -1,0 +1,54 @@
+name: 'test'
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  MIX_ENV: test
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  main:
+    name: Unit tests
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres
+        ports:
+          - '5432:5432'
+        env:
+          POSTGRES_USERNAME: postgres
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Elixir/Erlang setup
+        uses: erlef/setup-elixir@v1
+        with:
+          elixir-version: '1.13'
+          otp-version: '24.2'
+      - name: Restore deps cache
+        uses: actions/cache@v3
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-v2-${{ hashFiles('**/mix.lock') }}
+          restore-keys: ${{ runner.os }}-mix-v2-
+      - name: Install deps
+        run: mix deps.get
+      - name: Compiler warnings
+        run: mix compile --warnings-as-errors
+      - name: Format
+        run: mix format --check-formatted
+      - name: Credo strict
+        run: mix credo --strict
+      - name: ecto setup
+        run: mix ecto.setup
+      - name: tests
+        run: mix test
