@@ -32,7 +32,9 @@ defmodule TemporaryHackWeb.ConnCase do
   end
 
   setup tags do
+    # credo:disable-for-next-line
     pid = Ecto.Adapters.SQL.Sandbox.start_owner!(TemporaryHack.Repo, shared: not tags[:async])
+    # credo:disable-for-next-line
     on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
