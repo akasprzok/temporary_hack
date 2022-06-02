@@ -22,6 +22,9 @@ if Mix.env() != :prod do
     ]
 end
 
+config :temporary_hack, TemporaryHack.Repo,
+  migration_primary_key: [name: :id, type: :binary_id]
+
 config :temporary_hack,
   ecto_repos: [TemporaryHack.Repo]
 
