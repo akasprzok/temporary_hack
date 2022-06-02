@@ -57,7 +57,7 @@ config :esbuild,
 # Configures Elixir's Logger
 config :logger, :console,
   format: {LogfmtEx, :format},
-  metadata: [:request_id, :mfa, :pid]
+  metadata: [:request_id, :mfa, :pid],
   utc_log: true
 
 config :logfmt_ex, :opts,
