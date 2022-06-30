@@ -7,6 +7,8 @@ defmodule TemporaryHack.Application do
 
   @impl true
   def start(_type, _args) do
+    prometheus()
+
     children = [
       {LogfmtEx, Application.get_env(:logfmt_ex, :opts)},
       # Start the Ecto repository
@@ -33,5 +35,13 @@ defmodule TemporaryHack.Application do
   def config_change(changed, _new, removed) do
     TemporaryHackWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  def prometheus do
+    TemporaryHack.PhoenixInstrumenter.setup()
+    TemporaryHack.PipelineInstrumenter.setup()
+    TemporaryHack.RepoInstrumenter.setup()
+    Prometheus.Registry.register_collector(:prometheus_process_collector)
+    TemporaryHack.PrometheusExporter.setup()
   end
 end
