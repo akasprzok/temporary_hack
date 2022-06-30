@@ -18,9 +18,8 @@ defmodule TemporaryHack.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: TemporaryHack.PubSub},
       # Start the Endpoint (http/https)
-      TemporaryHackWeb.Endpoint
-      # Start a worker by calling: TemporaryHack.Worker.start_link(arg)
-      # {TemporaryHack.Worker, arg}
+      TemporaryHackWeb.Endpoint,
+      TemporaryHackWeb.Prometheus.Endpoint
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

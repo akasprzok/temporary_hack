@@ -31,7 +31,6 @@ defmodule TemporaryHackWeb.Endpoint do
     plug Phoenix.Ecto.CheckRepoStatus, otp_app: :temporary_hack
   end
 
-  plug TemporaryHack.PrometheusExporter
   plug TemporaryHack.PipelineInstrumenter
 
   plug Phoenix.LiveDashboard.RequestLogger,

@@ -55,6 +55,18 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
+  config :temporary_hack, TemporaryHackWeb.Endpoint,
+    url: [host: host, port: 9090],
+    http: [
+      # Enable IPv6 and bind on all interfaces.
+      # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
+      # See the documentation on https://hexdocs.pm/plug_cowboy/Plug.Cowboy.html
+      # for details about using IPv6 vs IPv4 and loopback vs public addresses.
+      ip: {0, 0, 0, 0, 0, 0, 0, 0},
+      port: port
+    ],
+    secret_key_base: secret_key_base
+
   # ## Using releases
   #
   # If you are doing OTP releases, you need to instruct Phoenix

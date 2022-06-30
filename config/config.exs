@@ -66,6 +66,8 @@ config :temporary_hack, TemporaryHackWeb.Endpoint,
   pubsub_server: TemporaryHack.PubSub,
   live_view: [signing_salt: "eLKkoiun"]
 
+config :temporary_hack, TemporaryHackWeb.Prometheus.Endpoint, url: [host: "localhost"]
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails

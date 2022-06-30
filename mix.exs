@@ -58,7 +58,7 @@ defmodule TemporaryHack.MixProject do
       {:prometheus_ecto, "~> 1.0"},
       {:prometheus_phoenix, "~> 1.0"},
       {:prometheus_process_collector, "~> 1.0"},
-      {:git_hooks, "~> 0.7", only: :dev, runtime: false},
+      {:git_hooks, "~> 0.7", only: :dev, runtime: false}
     ]
   end
 
