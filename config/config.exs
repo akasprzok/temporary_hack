@@ -7,23 +7,54 @@
 # General application configuration
 import Config
 
-if Mix.env() != :prod do
-  config :git_hooks,
-    auto_install: true,
-    verbose: true,
-    hooks: [
-      pre_commit: [
-        tasks: [
-          {:cmd, "mix compile --warnings-as-errors"},
-          {:mix_task, :format},
-          {:mix_task, :credo, ["--strict"]}
-        ]
-      ]
-    ]
-end
+config :prometheus, TemporaryHack.PhoenixInstrumenter,
+  controller_call_labels: [:controller, :action],
+  duration_buckets: [
+    10,
+    25,
+    50,
+    100,
+    250,
+    500,
+    1000,
+    2500,
+    5000,
+    10_000,
+    25_000,
+    50_000,
+    100_000,
+    250_000,
+    500_000,
+    1_000_000,
+    2_500_000,
+    5_000_000,
+    10_000_000
+  ],
+  registry: :default,
+  duration_unit: :microseconds
+
+config :prometheus, TemporaryHack.PipelineInstrumenter,
+  labels: [:status_class, :method, :host, :scheme, :request_path],
+  duration_buckets: [
+    10,
+    100,
+    1_000,
+    10_000,
+    100_000,
+    300_000,
+    500_000,
+    750_000,
+    1_000_000,
+    1_500_000,
+    2_000_000,
+    3_000_000
+  ],
+  registry: :default,
+  duration_unit: :microseconds
 
 config :temporary_hack, TemporaryHack.Repo,
-  migration_primary_key: [name: :id, type: :binary_id]
+  # and maybe Ecto.LogEntry? Up to you
+  loggers: [TemporaryHack.RepoInstrumenter]
 
 config :temporary_hack,
   ecto_repos: [TemporaryHack.Repo]
@@ -34,6 +65,8 @@ config :temporary_hack, TemporaryHackWeb.Endpoint,
   render_errors: [view: TemporaryHackWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: TemporaryHack.PubSub,
   live_view: [signing_salt: "eLKkoiun"]
+
+config :temporary_hack, TemporaryHackWeb.Prometheus.Endpoint, url: [host: "localhost"]
 
 # Configures the mailer
 #

@@ -20,7 +20,7 @@ defmodule TemporaryHack.MixProject do
   def application do
     [
       mod: {TemporaryHack.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :prometheus_ex, :prometheus_plugs]
     ]
   end
 
@@ -52,8 +52,13 @@ defmodule TemporaryHack.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:ex_doc, "~> 0.28", only: :dev, runtime: false},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:git_hooks, "~> 0.7", only: :dev, runtime: false},
-      {:logfmt_ex, "~> 0.2"}
+      {:logfmt_ex, "~> 0.2"},
+      {:prometheus_ex, "~> 3.0"},
+      {:prometheus_plugs, "~> 1.1.1"},
+      {:prometheus_ecto, "~> 1.0"},
+      {:prometheus_phoenix, "~> 1.0"},
+      {:prometheus_process_collector, "~> 1.0"},
+      {:git_hooks, "~> 0.7", only: :dev, runtime: false}
     ]
   end
 

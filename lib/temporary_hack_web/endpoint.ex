@@ -31,6 +31,8 @@ defmodule TemporaryHackWeb.Endpoint do
     plug Phoenix.Ecto.CheckRepoStatus, otp_app: :temporary_hack
   end
 
+  plug TemporaryHack.PipelineInstrumenter
+
   plug Phoenix.LiveDashboard.RequestLogger,
     param_key: "request_logger",
     cookie_key: "request_logger"
