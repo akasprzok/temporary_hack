@@ -70,7 +70,7 @@ if config_env() == :prod do
     username: System.fetch_env!("SMTP_USERNAME"),
     password: System.fetch_env!("SMTP_PASSWORD"),
     port: "SMTP_PORT" |> System.fetch_env!() |> String.to_integer(),
-    ssl: true,
+    ssl: false,
     tls: :always,
     auth: :always,
     retries: 5

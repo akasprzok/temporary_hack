@@ -7,6 +7,7 @@ defmodule TemporaryHack.Application do
 
   @impl true
   def start(_type, _args) do
+    opentelemetry()
     prometheus()
 
     children = [
@@ -36,7 +37,12 @@ defmodule TemporaryHack.Application do
     :ok
   end
 
-  def prometheus do
+  def opentelemetry do
+    OpentelemetryPhoenix.setup(),
+    OpentelemetryEcto.setup([:temporary_hack, :repo])
+  end
+
+  defp prometheus do
     TemporaryHack.PhoenixInstrumenter.setup()
     TemporaryHack.PipelineInstrumenter.setup()
     TemporaryHack.RepoInstrumenter.setup()

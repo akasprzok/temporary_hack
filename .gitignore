@@ -32,3 +32,5 @@ temporary_hack-*.tar
 npm-debug.log
 /assets/node_modules/
 
+/.data/
+
