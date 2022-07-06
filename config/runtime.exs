@@ -56,8 +56,8 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
-  config :temporary_hack, TemporaryHackWeb.Endpoint,
-    url: [host: host, port: 9090],
+  config :temporary_hack, TemporaryHackWeb.Prometheus.Endpoint,
+    url: [host: "localhost", port: 9090],
     http: [
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: 9090
