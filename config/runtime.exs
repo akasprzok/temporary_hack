@@ -64,4 +64,7 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
+  config :temporary_hack, TemporaryHack.Mailer,
+    adapter: Swoosh.Adapters.Sendgrid,
+    api_key: System.fetch_env!("SENDGRID_API_KEY")
 end

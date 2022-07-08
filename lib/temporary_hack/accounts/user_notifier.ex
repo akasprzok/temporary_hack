@@ -9,7 +9,8 @@ defmodule TemporaryHack.Accounts.UserNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"TemporaryHack", "contact@example.com"})
+      |> from({"Temporary Hack", "paper_pusher@temporaryhack.com"})
+      |> reply_to("andreas@temporaryhack.com")
       |> subject(subject)
       |> text_body(body)
 

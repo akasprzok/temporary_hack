@@ -11,7 +11,4 @@ config :temporary_hack, TemporaryHackWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
-
-config :temporary_hack, TemporaryHack.Mailer,
-  adapter: Swoosh.Adapters.Sendgrid,
-  api_key: System.fetch_env!("SENDGRID_API_KEY")
+config :swoosh, :api_client, Swoosh.ApiClient.Hackney

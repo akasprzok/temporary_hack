@@ -10,7 +10,7 @@ defmodule TemporaryHack.MixProject do
       compilers: [:gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps(),
+      deps: deps()
     ]
   end
 
@@ -45,7 +45,7 @@ defmodule TemporaryHack.MixProject do
       {:phoenix_live_dashboard, "~> 0.6"},
       {:esbuild, "~> 0.3", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
-      {:gen_smtp, "~> 1.1"},
+      {:hackney, "~> 1.18"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.18"},
@@ -54,7 +54,7 @@ defmodule TemporaryHack.MixProject do
       {:ex_doc, "~> 0.28", only: :dev, runtime: false},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:logfmt_ex, "~> 0.2"},
-      #Prometheus
+      # Prometheus
       {:prometheus_ex, "~> 3.0"},
       {:prometheus_plugs, "~> 1.1.1"},
       {:prometheus_ecto, "~> 1.0"},
