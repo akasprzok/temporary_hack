@@ -54,6 +54,7 @@ defmodule TemporaryHack.MixProject do
       {:ex_doc, "~> 0.28", only: :dev, runtime: false},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:logfmt_ex, "~> 0.2"},
+      {:tesla, "~> 1.4"},
       # Prometheus
       {:prometheus_ex, "~> 3.0"},
       {:prometheus_plugs, "~> 1.1.1"},
