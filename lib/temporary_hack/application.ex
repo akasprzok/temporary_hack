@@ -38,7 +38,7 @@ defmodule TemporaryHack.Application do
   end
 
   def opentelemetry do
-    OpentelemetryPhoenix.setup(),
+    OpentelemetryPhoenix.setup()
     OpentelemetryEcto.setup([:temporary_hack, :repo])
   end
 

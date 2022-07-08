@@ -64,14 +64,4 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
-  config :temporary_hack, TemporaryHack.Mailer,
-    adapter: Swoosh.Adapters.SMTP,
-    relay: System.fetch_env!("SMTP_RELAY"),
-    username: System.fetch_env!("SMTP_USERNAME"),
-    password: System.fetch_env!("SMTP_PASSWORD"),
-    port: "SMTP_PORT" |> System.fetch_env!() |> String.to_integer(),
-    ssl: false,
-    tls: :always,
-    auth: :always,
-    retries: 5
 end

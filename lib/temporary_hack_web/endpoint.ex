@@ -48,5 +48,6 @@ defmodule TemporaryHackWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+  plug Plug.Logger
   plug TemporaryHackWeb.Router
 end
