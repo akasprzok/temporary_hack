@@ -45,7 +45,7 @@ defmodule TemporaryHack.MixProject do
       {:phoenix_live_dashboard, "~> 0.6"},
       {:esbuild, "~> 0.3", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
-      {:gen_smtp, "~> 1.1"},
+      {:hackney, "~> 1.18"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.18"},
@@ -54,12 +54,17 @@ defmodule TemporaryHack.MixProject do
       {:ex_doc, "~> 0.28", only: :dev, runtime: false},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:logfmt_ex, "~> 0.2"},
+      # Prometheus
       {:prometheus_ex, "~> 3.0"},
       {:prometheus_plugs, "~> 1.1.1"},
       {:prometheus_ecto, "~> 1.0"},
       {:prometheus_phoenix, "~> 1.0"},
       {:prometheus_process_collector, "~> 1.0"},
-      {:git_hooks, "~> 0.7", only: :dev, runtime: false}
+      # OpenTelemetry
+      {:opentelemetry_api, "~> 1.0"},
+      {:opentelemetry, "~> 1.0"},
+      {:opentelemetry_phoenix, "~> 1.0"},
+      {:opentelemetry_ecto, "~> 1.0"}
     ]
   end
 

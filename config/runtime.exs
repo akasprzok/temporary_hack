@@ -56,8 +56,8 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
-  config :temporary_hack, TemporaryHackWeb.Endpoint,
-    url: [host: host, port: 9090],
+  config :temporary_hack, TemporaryHackWeb.Prometheus.Endpoint,
+    url: [host: "localhost", port: 9090],
     http: [
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: 9090
@@ -65,13 +65,6 @@ if config_env() == :prod do
     secret_key_base: secret_key_base
 
   config :temporary_hack, TemporaryHack.Mailer,
-    adapter: Swoosh.Adapters.SMTP,
-    relay: System.fetch_env!("SMTP_RELAY"),
-    username: System.fetch_env!("SMTP_USERNAME"),
-    password: System.fetch_env!("SMTP_PASSWORD"),
-    port: "SMTP_PORT" |> System.fetch_env!() |> String.to_integer(),
-    ssl: true,
-    tls: :always,
-    auth: :always,
-    retries: 5
+    adapter: Swoosh.Adapters.Sendgrid,
+    api_key: System.fetch_env!("SENDGRID_API_KEY")
 end
