@@ -350,4 +350,10 @@ defmodule TemporaryHack.Accounts do
       {:error, :user, changeset, _} -> {:error, changeset}
     end
   end
+
+  def set_admin(user) do
+    user
+    |> User.role_changeset(%{role: "admin"})
+    |> Repo.update()
+  end
 end
