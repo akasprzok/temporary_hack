@@ -6,8 +6,13 @@ defmodule TemporaryHackWeb.ProjectLive.Index do
   alias TemporaryHack.Projects.Project
 
   @impl true
-  def mount(_params, %{"user_token" => token} = _session, socket) do
-    {:ok, assign(socket, projects: list_projects(), current_user: get_user_by_session_token(token))}
+  def mount(_params, session, socket) do
+    user = Map.get(session, :token)
+    |> case do
+      nil -> nil
+      token -> Accounts.get_user_by_session_token(token)
+    end
+    {:ok, assign(socket, projects: list_projects(), current_user: user)}
   end
 
   @impl true
