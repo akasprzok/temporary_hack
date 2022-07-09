@@ -70,6 +70,18 @@ defmodule TemporaryHackWeb.Router do
     post "/users/reset_password", UserResetPasswordController, :create
     get "/users/reset_password/:token", UserResetPasswordController, :edit
     put "/users/reset_password/:token", UserResetPasswordController, :update
+
+
+    live "/projects", ProjectLive.Index, :index
+    live "/projects/:id", ProjectLive.Show, :show
+  end
+
+  scope "/", TemporaryHackWeb do
+    pipe_through [:browser, :require_admin]
+
+    live "/projects/new", ProjectLive.Index, :new
+    live "/projects/:id/edit", ProjectLive.Index, :edit
+    live "/projects/:id/show/edit", ProjectLive.Show, :edit
   end
 
   scope "/", TemporaryHackWeb do
