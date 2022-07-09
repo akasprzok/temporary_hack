@@ -3,14 +3,20 @@ defmodule TemporaryHack.Clients.Github do
 
   plug Tesla.Middleware.BaseUrl, "https://api.github.com"
   plug Tesla.Middleware.JSON
+
   plug Tesla.Middleware.Headers, [
     {"Accept", "application/vnd.github+json"},
     {"User-Agent", "TemporaryHack"}
   ]
-  plug Tesla.Middleware.BasicAuth, [username: "akasprzok", password: System.fetch_env!("GITHUB_ACCESS_TOKEN")]
+
+  plug Tesla.Middleware.BasicAuth,
+    username: "akasprzok",
+    password: System.fetch_env!("GITHUB_ACCESS_TOKEN")
+
   plug Tesla.Middleware.Logger
   plug Tesla.Middleware.Telemetry
   plug Tesla.Middleware.PathParams
+
   plug Tesla.Middleware.Retry,
     delay: 200,
     max_retries: 5,

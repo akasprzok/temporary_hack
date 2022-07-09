@@ -9,3 +9,9 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias TemporaryHack.{Accounts, AccountsFixtures}
+
+_user = AccountsFixtures.user_fixture(%{email: "user@temporaryhack.com", password: "user@temporaryhack.com"})
+{:ok, _admin} = %{email: "admin@temporaryhack.com", password: "admin@temporaryhack.com"} |>  AccountsFixtures.user_fixture()
+|> Accounts.set_admin()

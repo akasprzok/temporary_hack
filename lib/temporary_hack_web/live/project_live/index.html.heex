@@ -36,4 +36,6 @@
   </tbody>
 </table>
 
-<span><%= live_patch "New Project", to: Routes.project_index_path(@socket, :new) %></span>
+<%= if @current_user && TemporaryHackWeb.UserAuth.is_admin?(@current_user) do %>
+  <span><%= live_patch "New Project", to: Routes.project_index_path(@socket, :new) %></span>
+<% end %>

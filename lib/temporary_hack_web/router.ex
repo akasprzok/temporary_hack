@@ -71,9 +71,6 @@ defmodule TemporaryHackWeb.Router do
     get "/users/reset_password/:token", UserResetPasswordController, :edit
     put "/users/reset_password/:token", UserResetPasswordController, :update
 
-
-    live "/projects", ProjectLive.Index, :index
-    live "/projects/:id", ProjectLive.Show, :show
   end
 
   scope "/", TemporaryHackWeb do
@@ -90,6 +87,13 @@ defmodule TemporaryHackWeb.Router do
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+  end
+
+  scope "/", TemporaryHackWeb do
+    pipe_through [:browser]
+
+    live "/projects", ProjectLive.Index, :index
+    live "/projects/:id", ProjectLive.Show, :show
   end
 
   scope "/", TemporaryHackWeb do

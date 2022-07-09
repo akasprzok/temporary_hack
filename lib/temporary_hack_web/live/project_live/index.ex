@@ -6,7 +6,7 @@ defmodule TemporaryHackWeb.ProjectLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :projects, list_projects())}
+    {:ok, socket |> assign(:projects, list_projects())}
   end
 
   @impl true

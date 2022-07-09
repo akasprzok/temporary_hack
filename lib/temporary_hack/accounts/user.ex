@@ -120,7 +120,7 @@ defmodule TemporaryHack.Accounts.User do
   @doc """
   A user changeset for setting roles.
   """
-  defp role_changeset(user_or_changeset, attrs) do
+  def role_changeset(user_or_changeset, attrs) do
     user_or_changeset
     |> cast(attrs, [:role])
     |> validate_inclusion(:role, @roles)
