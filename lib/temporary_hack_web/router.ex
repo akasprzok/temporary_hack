@@ -74,26 +74,11 @@ defmodule TemporaryHackWeb.Router do
   end
 
   scope "/", TemporaryHackWeb do
-    pipe_through [:browser, :require_admin]
-
-    live "/projects/new", ProjectLive.Index, :new
-    live "/projects/:id/edit", ProjectLive.Index, :edit
-    live "/projects/:id/show/edit", ProjectLive.Show, :edit
-  end
-
-  scope "/", TemporaryHackWeb do
     pipe_through [:browser, :require_authenticated_user]
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
-  end
-
-  scope "/", TemporaryHackWeb do
-    pipe_through [:browser]
-
-    live "/projects", ProjectLive.Index, :index
-    live "/projects/:id", ProjectLive.Show, :show
   end
 
   scope "/", TemporaryHackWeb do
