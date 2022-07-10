@@ -1,25 +1,14 @@
-defmodule TemporaryHack.Portfolio do
+defmodule TemporaryHack.Admin.Portfolio do
   @moduledoc """
-  The Portfolio context.
+  The Admin Portfolio context.
   """
 
   import Ecto.Query, warn: false
-  alias TemporaryHack.Repo
+  alias TemporaryHack.{Repo, Portfolio}
 
   alias TemporaryHack.Portfolio.Project
 
-  @doc """
-  Returns the list of projects.
-
-  ## Examples
-
-      iex> list_projects()
-      [%Project{}, ...]
-
-  """
-  def list_projects do
-    Repo.all(Project)
-  end
+  defdelegate list_projects, to: Portfolio
 
   @doc """
   Gets a single project.

@@ -16,15 +16,7 @@
       <td><%= project.github_repo %></td>
       <td><%= project.hex %></td>
       <td><%= project.hex_docs %></td>
-
-      <td>
-        <span><%= link "Show", to: Routes.project_path(@conn, :show, project) %></span>
-        <span><%= link "Edit", to: Routes.project_path(@conn, :edit, project) %></span>
-        <span><%= link "Delete", to: Routes.project_path(@conn, :delete, project), method: :delete, data: [confirm: "Are you sure?"] %></span>
-      </td>
     </tr>
 <% end %>
   </tbody>
 </table>
-
-<span><%= link "New Project", to: Routes.project_path(@conn, :new) %></span>

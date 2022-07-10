@@ -13,7 +13,7 @@ defmodule TemporaryHack.PortfolioFixtures do
       |> Enum.into(%{
         github_repo: "temporary_hack"
       })
-      |> TemporaryHack.Portfolio.create_project()
+      |> TemporaryHack.Admin.Portfolio.create_project()
 
     project
   end

@@ -70,7 +70,6 @@ defmodule TemporaryHackWeb.Router do
     post "/users/reset_password", UserResetPasswordController, :create
     get "/users/reset_password/:token", UserResetPasswordController, :edit
     put "/users/reset_password/:token", UserResetPasswordController, :update
-
   end
 
   scope "/", TemporaryHackWeb do
@@ -81,16 +80,10 @@ defmodule TemporaryHackWeb.Router do
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
   end
 
-  scope "/", TemporaryHackWeb do
+  scope "/admin", TemporaryHackWeb.Admin do
     pipe_through [:browser, :require_authenticated_user, :require_admin]
 
-    get "/projects/new", ProjectController, :new
-    post "/projects/new", ProjectController, :create
-    get "/projects/:github_repo/edit", ProjectController, :edit
-    patch "/projects/:github_repo", ProjectController, :update
-    put "/projects/:github_repo", ProjectController, :update
-    delete "/projects/:github_repo", ProjectController, :delete
-
+    resources "/projects", ProjectController
   end
 
   scope "/", TemporaryHackWeb do
@@ -103,6 +96,5 @@ defmodule TemporaryHackWeb.Router do
     post "/users/confirm/:token", UserConfirmationController, :update
 
     get "/projects", ProjectController, :index
-    get "/projects/:github_repo", ProjectController, :show
   end
 end
