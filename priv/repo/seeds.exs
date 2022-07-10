@@ -19,3 +19,4 @@ _user = AccountsFixtures.user_fixture(%{email: "user@temporaryhack.com", passwor
 
 # Projects
 _temporary_hack = PortfolioFixtures.project_fixture(%{github_repo: "temporary_hack"})
+_logfmt_ex = PortfolioFixtures.project_fixture(%{github_repo: "logfmt_ex", hex: true, hex_docs: true})

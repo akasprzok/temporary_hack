@@ -9,5 +9,7 @@ defmodule TemporaryHack.Repo.Migrations.CreateProjects do
 
       timestamps()
     end
+
+    create unique_index(:projects, [:github_repo])
   end
 end

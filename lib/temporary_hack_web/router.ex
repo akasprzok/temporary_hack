@@ -82,6 +82,18 @@ defmodule TemporaryHackWeb.Router do
   end
 
   scope "/", TemporaryHackWeb do
+    pipe_through [:browser, :require_authenticated_user, :require_admin]
+
+    get "/projects/new", ProjectController, :new
+    post "/projects/new", ProjectController, :create
+    get "/projects/:github_repo/edit", ProjectController, :edit
+    patch "/projects/:github_repo", ProjectController, :update
+    put "/projects/:github_repo", ProjectController, :update
+    delete "/projects/:github_repo", ProjectController, :delete
+
+  end
+
+  scope "/", TemporaryHackWeb do
     pipe_through [:browser]
 
     delete "/users/log_out", UserSessionController, :delete
@@ -89,5 +101,8 @@ defmodule TemporaryHackWeb.Router do
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :edit
     post "/users/confirm/:token", UserConfirmationController, :update
+
+    get "/projects", ProjectController, :index
+    get "/projects/:github_repo", ProjectController, :show
   end
 end
