@@ -47,6 +47,7 @@ defmodule TemporaryHack.MixProject do
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:logfmt_ex, "~> 0.2"},
       {:tesla, "~> 1.4"},
+      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       # Telemetry
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
