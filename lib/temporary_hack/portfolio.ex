@@ -20,4 +20,8 @@ defmodule TemporaryHack.Portfolio do
   def list_projects do
     Repo.all(Project)
   end
+
+  defp hex_docs_url(github_repo) do
+    "https://hexdocs.pm/#{github_repo}"
+  end
 end

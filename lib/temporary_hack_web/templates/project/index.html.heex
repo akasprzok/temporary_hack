@@ -6,7 +6,7 @@
       <th>Github repo</th>
       <th>Hex</th>
       <th>Hex Docs</th>
-
+      <th>Language</th>
       <th></th>
     </tr>
   </thead>
@@ -16,6 +16,9 @@
       <td><%= project.github_repo %></td>
       <td><%= project.hex %></td>
       <td><%= project.hex_docs %></td>
+      <%= if project.github_info do %>
+      <td><%= project.github_info["language"] %></td>
+      <% end %>
     </tr>
 <% end %>
   </tbody>

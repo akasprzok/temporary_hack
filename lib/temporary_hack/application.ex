@@ -20,7 +20,8 @@ defmodule TemporaryHack.Application do
       {Phoenix.PubSub, name: TemporaryHack.PubSub},
       # Start the Endpoint (http/https)
       TemporaryHackWeb.Endpoint,
-      TemporaryHackWeb.Prometheus.Endpoint
+      TemporaryHackWeb.Prometheus.Endpoint,
+      {Task.Supervisor, name: TemporaryHackWeb.Portfolio.Project.EnrichmentSupervisor}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
