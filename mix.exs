@@ -20,7 +20,7 @@ defmodule TemporaryHack.MixProject do
   def application do
     [
       mod: {TemporaryHack.Application, []},
-      extra_applications: [:logger, :runtime_tools, :prometheus_ex, :prometheus_plugs]
+      extra_applications: [:logfmt_ex, :logger, :runtime_tools, :prometheus_ex, :prometheus_plugs]
     ]
   end
 
@@ -45,7 +45,7 @@ defmodule TemporaryHack.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:ex_doc, "~> 0.28", only: :dev, runtime: false},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:logfmt_ex, "~> 0.2"},
+      {:logfmt_ex, "~> 0.3"},
       {:tesla, "~> 1.4"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       # Telemetry
@@ -66,10 +66,12 @@ defmodule TemporaryHack.MixProject do
       {:prometheus_phoenix, "~> 1.0"},
       {:prometheus_process_collector, "~> 1.0"},
       # OpenTelemetry
+      {:certifi, "~> 2.8"},
       {:opentelemetry_api, "~> 1.0"},
       {:opentelemetry, "~> 1.0"},
       {:opentelemetry_phoenix, "~> 1.0"},
-      {:opentelemetry_ecto, "~> 1.0"}
+      {:opentelemetry_ecto, "~> 1.0"},
+      {:opentelemetry_exporter, "~> 1.0"}
     ]
   end
 
@@ -85,7 +87,7 @@ defmodule TemporaryHack.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
     ]
   end
 end

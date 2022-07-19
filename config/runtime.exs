@@ -67,4 +67,27 @@ if config_env() == :prod do
   config :temporary_hack, TemporaryHack.Mailer,
     adapter: Swoosh.Adapters.Sendgrid,
     api_key: System.fetch_env!("SENDGRID_API_KEY")
+
+  config :opentelemetry, :processors,
+    otel_batch_processor: %{
+          exporter: {
+            :opentelemetry_exporter,
+            %{
+              protocol: :grpc,
+              headers: [
+                {"Authorization", "Basic YWthc3Byem9rOlBqNFZqWU5xYU5hVXdEcg=="}
+                ],
+              endpoints: [
+                {:https, 'tempo-us-central1.grafana.net', 443, [
+                  verify: :verify_peer,
+                  cacertfile: :certifi.cacertfile(),
+                  depth: 3,
+                  customize_hostname_check: [
+                    match_fun: :public_key.pkix_verify_hostname_match_fun(:https)
+                  ]
+                ]}
+              ],
+            }
+          }
+        }
 end

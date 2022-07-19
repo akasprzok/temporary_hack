@@ -8,10 +8,7 @@ defmodule TemporaryHack.Application do
   @impl true
   def start(_type, _args) do
     opentelemetry()
-    prometheus()
-
     children = [
-      {LogfmtEx, Application.get_env(:logfmt_ex, :opts)},
       # Start the Ecto repository
       TemporaryHack.Repo,
       # Start the Telemetry supervisor
@@ -27,7 +24,9 @@ defmodule TemporaryHack.Application do
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: TemporaryHack.Supervisor]
-    Supervisor.start_link(children, opts)
+    {:ok, pid} = Supervisor.start_link(children, opts)
+    prometheus()
+    {:ok, pid}
   end
 
   # Tell Phoenix to update the endpoint configuration

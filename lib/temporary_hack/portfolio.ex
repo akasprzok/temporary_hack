@@ -19,6 +19,11 @@ defmodule TemporaryHack.Portfolio do
   """
   def list_projects do
     Repo.all(Project)
+    |> Enum.map(&enrich/1)
+  end
+
+  defp enrich(project) do
+    project
   end
 
   defp hex_docs_url(github_repo) do
