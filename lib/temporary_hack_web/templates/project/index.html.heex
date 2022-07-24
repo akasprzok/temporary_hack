@@ -1,0 +1,17 @@
+<h1>Listing Projects</h1>
+
+<%= for project <- @projects do %>
+  <div class="max-w-sm rounded w-full shadow-lg">
+    <div class="font-bold text-xl mb-2"><%= link(project.repo, to: project.html_url)%></div>
+    <p class="text-gray-700 text-base"><%= project.description %></p>
+    <%= if Map.has_key?(project, :hex) do %>
+      <div class="font-semibold text-l mb-2">Hex</div>
+      <div class="px-6 pt-4 pb-2"><%= project.hex.latest_version %></div>
+      <img src="https://img.shields.io/hexpm/l/logfmt_ex" />
+    <% end %>
+    <div class="px-6 pt-4 pb-2">
+      <span class="inline-blockf bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%=project.language%></span>
+      <span class="inline-blockf bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%=project.license%></span>
+    </div>
+  </div>
+<% end %>

@@ -140,6 +140,17 @@ defmodule TemporaryHackWeb.UserAuth do
     end
   end
 
+  def require_admin(conn, _opts) do
+    if is_admin?(conn.assigns[:current_user]) do
+      conn
+    else
+      conn
+      |> maybe_store_return_to()
+      |> redirect(to: Routes.user_session_path(conn, :new))
+      |> halt()
+    end
+  end
+
   defp maybe_store_return_to(%{method: "GET"} = conn) do
     put_session(conn, :user_return_to, current_path(conn))
   end
@@ -147,4 +158,12 @@ defmodule TemporaryHackWeb.UserAuth do
   defp maybe_store_return_to(conn), do: conn
 
   defp signed_in_path(_conn), do: "/"
+
+  def is_admin?(user), do: has_role?(user, "admin")
+
+  defp has_role?(nil, _roles), do: false
+  defp has_role?(user, roles) when is_list(roles), do: Enum.any?(roles, &has_role?(user, &1))
+  defp has_role?(user, role) when is_atom(role), do: has_role?(user, Atom.to_string(role))
+  defp has_role?(%{role: role}, role), do: true
+  defp has_role?(_user, _role), do: false
 end

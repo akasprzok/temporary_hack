@@ -13,6 +13,24 @@ if System.get_env("PHX_SERVER") && System.get_env("RELEASE_NAME") do
   config :temporary_hack, TemporaryHackWeb.Prometheus.Endpoint, server: true
 end
 
+if config_env() == :dev do
+  config :logger, :backends, [:console, Svadilfari]
+
+  config :logger, :svadilfari,
+    metadata: [:request_id, :trace_id, :mfa],
+    max_buffer: 10,
+    client: [
+      url: System.fetch_env!("LOKI_URL"),
+      opts: [
+        org_id: "tenant1"
+      ]
+    ],
+    labels: [
+      {"env", "dev"},
+      {"service", "temporary_hack"}
+    ]
+end
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||
@@ -67,4 +85,43 @@ if config_env() == :prod do
   config :temporary_hack, TemporaryHack.Mailer,
     adapter: Swoosh.Adapters.Sendgrid,
     api_key: System.fetch_env!("SENDGRID_API_KEY")
+
+  config :logger, :svadilfari,
+    metadata: [:request_id, :trace_id, :mfa],
+    max_buffer: 10,
+    client: [
+      url: System.fetch_env!("LOKI_URL"),
+      opts: [
+        org_id: "tenant1"
+      ]
+    ],
+    labels: [
+      {"env", "prod"},
+      {"service", "temporary_hack"}
+    ]
+
+  config :opentelemetry, :processors,
+    otel_batch_processor: %{
+      exporter: {
+        :opentelemetry_exporter,
+        %{
+          protocol: :grpc,
+          headers: [
+            {"x-honeycomb-team", System.fetch_env!("HONEYCOMB_API_KEY")},
+            {"x-honeycomb-dataset", "fly.io"}
+          ],
+          endpoints: [
+            {:https, 'api.honeycomb.io', 443,
+             [
+               verify: :verify_peer,
+               cacertfile: :certifi.cacertfile(),
+               depth: 3,
+               customize_hostname_check: [
+                 match_fun: :public_key.pkix_verify_hostname_match_fun(:https)
+               ]
+             ]}
+          ]
+        }
+      }
+    }
 end

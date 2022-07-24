@@ -80,6 +80,12 @@ defmodule TemporaryHackWeb.Router do
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
   end
 
+  scope "/admin", TemporaryHackWeb.Admin do
+    pipe_through [:browser, :require_authenticated_user, :require_admin]
+
+    resources "/projects", ProjectController
+  end
+
   scope "/", TemporaryHackWeb do
     pipe_through [:browser]
 
@@ -88,5 +94,7 @@ defmodule TemporaryHackWeb.Router do
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :edit
     post "/users/confirm/:token", UserConfirmationController, :update
+
+    get "/projects", ProjectController, :index
   end
 end

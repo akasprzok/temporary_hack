@@ -8,7 +8,9 @@ import Config
 config :temporary_hack, TemporaryHackWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json"
 
+config :swoosh, :api_client, Swoosh.ApiClient.Hackney
+
 # Do not print debug messages in production
 config :logger, level: :info
 
-config :swoosh, :api_client, Swoosh.ApiClient.Hackney
+config :logger, :backends, [:console, Svadilfari]
