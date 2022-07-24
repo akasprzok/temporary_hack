@@ -95,7 +95,7 @@ config :logger, utc_log: true
 
 config :logger, :console,
   # format: {LogfmtEx, :format},
-  metadata: [:request_id, :mfa, :pid]
+  metadata: [:span_id, :trace_id, :request_id, :mfa, :pid]
 
 config :logfmt_ex, :opts,
   format: [:level, :message, :metadata],

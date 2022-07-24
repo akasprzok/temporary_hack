@@ -3,7 +3,11 @@ defmodule TemporaryHack.Application do
   # for more information on OTP Applications
   @moduledoc false
 
+  alias OpenTelemetry.{Span, Tracer}
+
   use Application
+
+  require Logger
 
   @impl true
   def start(_type, _args) do
@@ -41,7 +45,25 @@ defmodule TemporaryHack.Application do
   def opentelemetry do
     OpentelemetryPhoenix.setup()
     OpentelemetryEcto.setup([:temporary_hack, :repo])
+
+    :ok = :telemetry.attach(
+      {__MODULE__, :router_dispatch_start},
+      [:phoenix, :router_dispatch, :start],
+      &handle_router_dispatch_start/4,
+      %{}
+    )
   end
+
+  def handle_router_dispatch_start(_event, _measurements, _meta, _config) do
+    with span_ctx when span_ctx != :undefined <- Tracer.current_span_ctx() do
+      Logger.metadata(
+        trace_id: span_ctx |> Span.trace_id() |> to_hex(),
+        span_id: span_ctx |> Span.span_id() |> to_hex()
+      )
+    end
+  end
+
+  defp to_hex(int), do: int |> Integer.to_string(16) |> String.downcase()
 
   defp prometheus do
     TemporaryHack.PhoenixInstrumenter.setup()
