@@ -3,9 +3,8 @@ defmodule TemporaryHack.Portfolio.Project do
   import Ecto.Changeset
 
   schema "projects" do
-    field :github_repo, :string
-    field :hex, :boolean, default: false
-    field :hex_docs, :boolean, default: false
+    field :user, :string, default: "akasprzok"
+    field :repo, :string
 
     timestamps()
   end
@@ -13,8 +12,8 @@ defmodule TemporaryHack.Portfolio.Project do
   @doc false
   def changeset(project, attrs) do
     project
-    |> cast(attrs, [:github_repo, :hex, :hex_docs])
-    |> validate_required([:github_repo])
-    |> unique_constraint(:github_repo)
+    |> cast(attrs, [:user, :repo])
+    |> validate_required([:repo])
+    |> unique_constraint(:user)
   end
 end

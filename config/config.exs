@@ -91,10 +91,11 @@ config :esbuild,
   ]
 
 # Configures Elixir's Logger
+config :logger, utc_log: true
+
 config :logger, :console,
-  format: {LogfmtEx, :format},
-  metadata: [:request_id, :mfa, :pid],
-  utc_log: true
+  # format: {LogfmtEx, :format},
+  metadata: [:request_id, :mfa, :pid]
 
 config :logfmt_ex, :opts,
   format: [:level, :message, :metadata],

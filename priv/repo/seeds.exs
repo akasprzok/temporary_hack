@@ -25,7 +25,6 @@ _user =
   |> Accounts.set_admin()
 
 # Projects
-_temporary_hack = PortfolioFixtures.project_fixture(%{github_repo: "temporary_hack"})
+_temporary_hack = PortfolioFixtures.project_fixture(%{repo: "temporary_hack"})
 
-_logfmt_ex =
-  PortfolioFixtures.project_fixture(%{github_repo: "logfmt_ex", hex: true, hex_docs: true})
+_logfmt_ex = PortfolioFixtures.project_fixture(%{repo: "logfmt_ex"})

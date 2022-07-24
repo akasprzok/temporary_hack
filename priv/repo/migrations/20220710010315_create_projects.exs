@@ -3,13 +3,12 @@ defmodule TemporaryHack.Repo.Migrations.CreateProjects do
 
   def change do
     create table(:projects) do
-      add :github_repo, :string
-      add :hex, :boolean
-      add :hex_docs, :boolean
+      add :user, :string
+      add :repo, :string
 
       timestamps()
     end
 
-    create unique_index(:projects, [:github_repo])
+    create unique_index(:projects, [:user, :repo])
   end
 end

@@ -1,10 +1,12 @@
 defmodule TemporaryHack.MixProject do
   use Mix.Project
 
+  @version "0.1.0"
+
   def project do
     [
       app: :temporary_hack,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:gettext] ++ Mix.compilers(),
@@ -20,7 +22,17 @@ defmodule TemporaryHack.MixProject do
   def application do
     [
       mod: {TemporaryHack.Application, []},
-      extra_applications: [:logfmt_ex, :logger, :runtime_tools, :prometheus_ex, :prometheus_plugs]
+      extra_applications: [:logfmt_ex, :logger, :runtime_tools, :prometheus_ex, :prometheus_plugs],
+      releases: [
+        temporary_hack: [
+          version: @version,
+          applications: [
+            opentelemetry_exporter: :permanent,
+            opentelemetry: :temporary,
+            temporary_hack: :permanent
+          ]
+        ]
+      ]
     ]
   end
 
@@ -36,16 +48,12 @@ defmodule TemporaryHack.MixProject do
     [
       {:bcrypt_elixir, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
-      {:floki, ">= 0.30.0", only: :test},
       {:esbuild, "~> 0.3", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
       {:hackney, "~> 1.18"},
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:ex_doc, "~> 0.28", only: :dev, runtime: false},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:logfmt_ex, "~> 0.3"},
       {:tesla, "~> 1.4"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       # Telemetry
@@ -67,11 +75,19 @@ defmodule TemporaryHack.MixProject do
       {:prometheus_process_collector, "~> 1.0"},
       # OpenTelemetry
       {:certifi, "~> 2.8"},
-      {:opentelemetry_api, "~> 1.0"},
       {:opentelemetry, "~> 1.0"},
-      {:opentelemetry_phoenix, "~> 1.0"},
+      {:opentelemetry_api, "~> 1.0"},
       {:opentelemetry_ecto, "~> 1.0"},
-      {:opentelemetry_exporter, "~> 1.0"}
+      {:opentelemetry_exporter, "~> 1.0"},
+      {:opentelemetry_phoenix, "~> 1.0"},
+      # Logging
+      {:logfmt_ex, "~> 0.3"},
+      {:svadilfari, "~> 0.1.1"},
+      # Testing
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:floki, ">= 0.30.0", only: :test},
+      # Documentation
+      {:ex_doc, "~> 0.28", only: :dev, runtime: false},
     ]
   end
 
