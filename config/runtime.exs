@@ -107,11 +107,11 @@ if config_env() == :prod do
         %{
           protocol: :grpc,
           headers: [
-            {"x-honeycomb-team", System.fetch_env!("HONEYCOMB_API_KEY")},
-            {"x-honeycomb-dataset", "fly.io"}
+            {"X-Org-ID", "tenant1"},
+            {"authorization", System.fetch_env!("GRAFANA_TRACING_TOKEN")}
           ],
           endpoints: [
-            {:https, 'api.honeycomb.io', 443,
+            {:https, 'tempo-us-central1.grafana.net', 443,
              [
                verify: :verify_peer,
                cacertfile: :certifi.cacertfile(),
