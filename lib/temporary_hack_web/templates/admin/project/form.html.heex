@@ -5,17 +5,13 @@
     </div>
   <% end %>
 
-  <%= label f, :github_repo %>
-  <%= text_input f, :github_repo %>
-  <%= error_tag f, :github_repo %>
+  <%= label f, :user %>
+  <%= text_input f, :user %>
+  <%= error_tag f, :user %>
 
-  <%= label f, :hex %>
-  <%= checkbox f, :hex %>
-  <%= error_tag f, :hex %>
-
-  <%= label f, :hex_docs %>
-  <%= checkbox f, :hex_docs %>
-  <%= error_tag f, :hex_docs %>
+  <%= label f, :repo %>
+  <%= text_input f, :repo %>
+  <%= error_tag f, :repo %>
 
   <div>
     <%= submit "Save" %>

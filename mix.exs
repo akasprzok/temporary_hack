@@ -87,7 +87,7 @@ defmodule TemporaryHack.MixProject do
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:floki, ">= 0.30.0", only: :test},
       # Documentation
-      {:ex_doc, "~> 0.28", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.28", only: :dev, runtime: false}
     ]
   end
 

@@ -17,9 +17,12 @@ defmodule TemporaryHackWeb.ProjectController do
       |> Enum.map(fn project ->
         case github_info(project) do
           {:ok, github_info} ->
-            info = Map.merge(project, github_info)
-            |> enrich()
-          other -> other
+            info =
+              Map.merge(project, github_info)
+              |> enrich()
+
+          other ->
+            other
         end
       end)
 

@@ -46,12 +46,13 @@ defmodule TemporaryHack.Application do
     OpentelemetryPhoenix.setup()
     OpentelemetryEcto.setup([:temporary_hack, :repo])
 
-    :ok = :telemetry.attach(
-      {__MODULE__, :router_dispatch_start},
-      [:phoenix, :router_dispatch, :start],
-      &handle_router_dispatch_start/4,
-      %{}
-    )
+    :ok =
+      :telemetry.attach(
+        {__MODULE__, :router_dispatch_start},
+        [:phoenix, :router_dispatch, :start],
+        &handle_router_dispatch_start/4,
+        %{}
+      )
   end
 
   def handle_router_dispatch_start(_event, _measurements, _meta, _config) do
