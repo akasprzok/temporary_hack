@@ -26,7 +26,9 @@ defmodule TemporaryHack.Clients.Hex do
     end
 
   def package(package) do
-    Cachex.fetch!(:hex, package, &do_package/1, ttl: :timer.seconds(60))
+    Tracer.with_span "hex_package" do
+      Cachex.fetch!(:hex, package, &do_package/1, ttl: :timer.seconds(60))
+    end
   end
 
   defp do_package(package) do

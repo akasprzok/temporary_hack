@@ -1,6 +1,9 @@
 defmodule TemporaryHack.Clients.Github do
   use Tesla
 
+  require OpenTelemetry.Tracer
+  alias OpenTelemetry.Tracer
+
   plug Tesla.Middleware.BaseUrl, "https://api.github.com"
   plug Tesla.Middleware.JSON
 
@@ -37,11 +40,15 @@ defmodule TemporaryHack.Clients.Github do
   end
 
   def repo(user, repo) do
-    Cachex.fetch!(:github, {user, repo}, &do_repo/1, ttl: :timer.seconds(60))
+    Tracer.with_span "github_repo" do
+      Cachex.fetch!(:github, {user, repo}, &do_repo/1, ttl: :timer.seconds(60))
+    end
   end
 
   defp do_repo({user, repo}) do
-    params = [user: user, repo: repo]
-    get("/repos/:user/:repo", opts: [path_params: params])
+    Tracer.with_span "github_repo_request" do
+      params = [user: user, repo: repo]
+      get("/repos/:user/:repo", opts: [path_params: params])
+    end
   end
 end

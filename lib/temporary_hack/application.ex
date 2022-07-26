@@ -52,7 +52,7 @@ defmodule TemporaryHack.Application do
       :telemetry.attach(
         {__MODULE__, :router_dispatch_start},
         [:phoenix, :router_dispatch, :start],
-        &handle_router_dispatch_start/4,
+        &__MODULE__.handle_router_dispatch_start/4,
         %{}
       )
   end
