@@ -12,7 +12,6 @@ defmodule TemporaryHack.Portfolio do
   def list_projects() do
     Project
     |> Repo.all()
-    |> IO.inspect()
     |> Enum.map(&ProjectWithMetadata.enrich/1)
   end
 end

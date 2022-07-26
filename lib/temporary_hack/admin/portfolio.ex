@@ -8,7 +8,10 @@ defmodule TemporaryHack.Admin.Portfolio do
 
   alias TemporaryHack.Portfolio.Project
 
-  defdelegate list_projects, to: Portfolio
+  def list_projects() do
+    Project
+    |> Repo.all()
+  end
 
   @doc """
   Gets a single project.
