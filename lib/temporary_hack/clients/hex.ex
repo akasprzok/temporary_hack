@@ -26,6 +26,10 @@ defmodule TemporaryHack.Clients.Hex do
     end
 
   def package(package) do
+    Cachex.fetch!(:hex, package, &do_package/1, ttl: :timer.seconds(60))
+  end
+
+  defp do_package(package) do
     params = [package: package]
     get("/api/packages/:package", opts: [path_params: params])
   end

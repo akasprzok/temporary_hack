@@ -23,7 +23,9 @@ defmodule TemporaryHack.Application do
       # Start the Endpoint (http/https)
       TemporaryHackWeb.Endpoint,
       TemporaryHackWeb.Prometheus.Endpoint,
-      {Task.Supervisor, name: TemporaryHackWeb.Portfolio.Project.EnrichmentSupervisor}
+      {Task.Supervisor, name: TemporaryHackWeb.Portfolio.Project.EnrichmentSupervisor},
+      Supervisor.child_spec({Cachex, [name: :github]}, id: :github),
+      Supervisor.child_spec({Cachex, [name: :hex]}, id: :hex)
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

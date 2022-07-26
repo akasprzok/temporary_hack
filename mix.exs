@@ -56,6 +56,7 @@ defmodule TemporaryHack.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:tesla, "~> 1.4"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
+      {:cachex, "~> 3.4"},
       # Telemetry
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},

@@ -37,6 +37,10 @@ defmodule TemporaryHack.Clients.Github do
   end
 
   def repo(user, repo) do
+    Cachex.fetch!(:github, {user, repo}, &do_repo/1, ttl: :timer.seconds(60))
+  end
+
+  defp do_repo({user, repo}) do
     params = [user: user, repo: repo]
     get("/repos/:user/:repo", opts: [path_params: params])
   end
