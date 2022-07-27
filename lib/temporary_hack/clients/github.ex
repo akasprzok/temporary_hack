@@ -41,14 +41,12 @@ defmodule TemporaryHack.Clients.Github do
 
   def repo(user, repo) do
     Tracer.with_span "github_repo" do
-      Cachex.fetch!(:github, {user, repo}, &do_repo/1, ttl: :timer.seconds(60))
+      Cachex.fetch!(:github, {user, repo}, &do_repo/1)
     end
   end
 
   defp do_repo({user, repo}) do
-    Tracer.with_span "github_repo_request" do
-      params = [user: user, repo: repo]
-      get("/repos/:user/:repo", opts: [path_params: params])
-    end
+    params = [user: user, repo: repo]
+    get("/repos/:user/:repo", opts: [path_params: params])
   end
 end

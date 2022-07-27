@@ -1,6 +1,9 @@
 defmodule TemporaryHack.Clients.Hex do
   use Tesla
 
+  require OpenTelemetry.Tracer
+  alias OpenTelemetry.Tracer
+
   plug Tesla.Middleware.BaseUrl, "https://hex.pm"
 
   plug Tesla.Middleware.Headers, [
@@ -27,7 +30,7 @@ defmodule TemporaryHack.Clients.Hex do
 
   def package(package) do
     Tracer.with_span "hex_package" do
-      Cachex.fetch!(:hex, package, &do_package/1, ttl: :timer.seconds(60))
+      Cachex.fetch!(:hex, package, &do_package/1)
     end
   end
 

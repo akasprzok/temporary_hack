@@ -9,6 +9,8 @@ defmodule TemporaryHack.Application do
 
   require Logger
 
+  import Cachex.Spec
+
   @impl true
   def start(_type, _args) do
     opentelemetry()
@@ -24,8 +26,32 @@ defmodule TemporaryHack.Application do
       TemporaryHackWeb.Endpoint,
       TemporaryHackWeb.Prometheus.Endpoint,
       {Task.Supervisor, name: TemporaryHackWeb.Portfolio.Project.EnrichmentSupervisor},
-      Supervisor.child_spec({Cachex, [name: :github]}, id: :github),
-      Supervisor.child_spec({Cachex, [name: :hex]}, id: :hex)
+      Supervisor.child_spec(
+        {Cachex,
+         [
+           name: :github,
+           expiration:
+             expiration(
+               default: :timer.minutes(4),
+               interval: :timer.minutes(2),
+               lazy: true
+             )
+         ]},
+        id: :github
+      ),
+      Supervisor.child_spec(
+        {Cachex,
+         [
+           name: :hex,
+           expiration:
+             expiration(
+               default: :timer.minutes(4),
+               interval: :timer.minutes(2),
+               lazy: true
+             )
+         ]},
+        id: :hex
+      )
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
