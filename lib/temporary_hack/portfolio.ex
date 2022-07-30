@@ -6,7 +6,6 @@ defmodule TemporaryHack.Portfolio do
   import Ecto.Query, warn: false
   alias TemporaryHack.Repo
 
-  alias TemporaryHack.Portfolio
   alias TemporaryHack.Portfolio.{Project, ProjectWithMetadata}
 
   def list_projects() do

@@ -4,9 +4,9 @@ defmodule TemporaryHack.Admin.Portfolio do
   """
 
   import Ecto.Query, warn: false
-  alias TemporaryHack.{Repo, Portfolio}
 
   alias TemporaryHack.Portfolio.Project
+  alias TemporaryHack.Repo
 
   def list_projects do
     Project
