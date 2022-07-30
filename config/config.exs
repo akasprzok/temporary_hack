@@ -1,50 +1,5 @@
 import Config
 
-config :prometheus, TemporaryHack.PhoenixInstrumenter,
-  controller_call_labels: [:controller, :action],
-  duration_buckets: [
-    10,
-    25,
-    50,
-    100,
-    250,
-    500,
-    1000,
-    2500,
-    5000,
-    10_000,
-    25_000,
-    50_000,
-    100_000,
-    250_000,
-    500_000,
-    1_000_000,
-    2_500_000,
-    5_000_000,
-    10_000_000
-  ],
-  registry: :default,
-  duration_unit: :microseconds
-
-config :prometheus, TemporaryHack.PipelineInstrumenter,
-  labels: [:status_class, :method, :host, :scheme, :request_path],
-  duration_buckets: [
-    10,
-    100,
-    1_000,
-    10_000,
-    100_000,
-    300_000,
-    500_000,
-    750_000,
-    1_000_000,
-    1_500_000,
-    2_000_000,
-    3_000_000
-  ],
-  registry: :default,
-  duration_unit: :microseconds
-
 config :temporary_hack, TemporaryHack.Repo,
   # and maybe Ecto.LogEntry? Up to you
   loggers: [TemporaryHack.RepoInstrumenter]
@@ -59,15 +14,7 @@ config :temporary_hack, TemporaryHackWeb.Endpoint,
   pubsub_server: TemporaryHack.PubSub,
   live_view: [signing_salt: "eLKkoiun"]
 
-config :temporary_hack, TemporaryHackWeb.Prometheus.Endpoint, url: [host: "localhost"]
-
 # Configures the mailer
-#
-# By default it uses the "Local" adapter which stores the emails
-# locally. You can see the emails in your browser, at "/dev/mailbox".
-#
-# For production it's recommended to configure a different adapter
-# at the `config/runtime.exs`.
 config :temporary_hack, TemporaryHack.Mailer, adapter: Swoosh.Adapters.Local
 
 # Swoosh API client is needed for adapters other than SMTP.

@@ -9,7 +9,7 @@ defmodule TemporaryHack.MixProject do
       version: @version,
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:gettext] ++ Mix.compilers(),
+      compilers: Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -22,7 +22,7 @@ defmodule TemporaryHack.MixProject do
   def application do
     [
       mod: {TemporaryHack.Application, []},
-      extra_applications: [:logfmt_ex, :logger, :runtime_tools, :prometheus_ex, :prometheus_plugs],
+      extra_applications: [:logger, :runtime_tools],
       releases: [
         temporary_hack: [
           version: @version,
@@ -57,9 +57,6 @@ defmodule TemporaryHack.MixProject do
       {:tesla, "~> 1.4"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:cachex, "~> 3.4"},
-      # Telemetry
-      {:telemetry_metrics, "~> 0.6"},
-      {:telemetry_poller, "~> 1.0"},
       # Phoenix
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
@@ -69,11 +66,7 @@ defmodule TemporaryHack.MixProject do
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
       # Prometheus
-      {:prometheus_ex, "~> 3.0"},
-      {:prometheus_plugs, "~> 1.1.1"},
-      {:prometheus_ecto, "~> 1.0"},
-      {:prometheus_phoenix, "~> 1.0"},
-      {:prometheus_process_collector, "~> 1.0"},
+      {:prom_ex, "~> 1.7"},
       # OpenTelemetry
       {:certifi, "~> 2.8"},
       {:opentelemetry, "~> 1.0"},
@@ -83,7 +76,7 @@ defmodule TemporaryHack.MixProject do
       {:opentelemetry_phoenix, "~> 1.0"},
       # Logging
       {:logfmt_ex, "~> 0.3"},
-      {:svadilfari, "~> 0.1.1"},
+      {:svadilfari, "~> 0.1.3"},
       # Testing
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:floki, ">= 0.30.0", only: :test},
