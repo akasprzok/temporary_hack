@@ -14,7 +14,7 @@ defmodule TemporaryHack.PromEx do
       {Plugins.Phoenix, router: TemporaryHackWeb.Router, endpoint: TemporaryHackWeb.Endpoint},
       Plugins.Ecto,
       # Plugins.Oban,
-      Plugins.PhoenixLiveView,
+      Plugins.PhoenixLiveView
       # Plugins.Absinthe,
       # Plugins.Broadway,
 
@@ -40,7 +40,7 @@ defmodule TemporaryHack.PromEx do
       {:prom_ex, "phoenix.json"},
       {:prom_ex, "ecto.json"},
       # {:prom_ex, "oban.json"},
-      {:prom_ex, "phoenix_live_view.json"},
+      {:prom_ex, "phoenix_live_view.json"}
       # {:prom_ex, "absinthe.json"},
       # {:prom_ex, "broadway.json"},
 

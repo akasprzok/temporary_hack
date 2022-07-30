@@ -26,7 +26,7 @@ defmodule TemporaryHack.Plug.Logger do
   @impl true
   def call(conn, level) do
     Logger.metadata(method: conn.method, path: conn.request_path)
-    #Logger.log(level, "Starting request")
+    # Logger.log(level, "Starting request")
 
     start = System.monotonic_time()
 
