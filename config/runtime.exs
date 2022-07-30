@@ -10,7 +10,6 @@ import Config
 # Start the phoenix server if environment is set and running in a release
 if System.get_env("PHX_SERVER") && System.get_env("RELEASE_NAME") do
   config :temporary_hack, TemporaryHackWeb.Endpoint, server: true
-  config :temporary_hack, TemporaryHackWeb.Prometheus.Endpoint, server: true
 end
 
 if config_env() == :dev do
@@ -74,14 +73,6 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
-  config :temporary_hack, TemporaryHackWeb.Prometheus.Endpoint,
-    url: [host: "localhost", port: 9090],
-    http: [
-      ip: {0, 0, 0, 0, 0, 0, 0, 0},
-      port: 9090
-    ],
-    secret_key_base: secret_key_base
-
   config :temporary_hack, TemporaryHack.Mailer,
     adapter: Swoosh.Adapters.Sendgrid,
     api_key: System.fetch_env!("SENDGRID_API_KEY")
@@ -98,6 +89,19 @@ if config_env() == :prod do
     labels: [
       {"env", "prod"},
       {"service", "temporary_hack"}
+    ]
+
+  config :temporary_hack, TemporaryHack.PromEx,
+    disabled: false,
+    manual_metrics_start_delay: :no_delay,
+    drop_metrics_groups: [],
+    grafana: [
+      host: System.fetch_env!("GRAFANA_HOST_URL"),
+      auth_token: System.fetch_env!("GRAFANA_AUTH_TOKEN")
+    ],
+    metrics_server: [
+      port: 9090,
+      path: "/metrics"
     ]
 
   config :opentelemetry, :processors,

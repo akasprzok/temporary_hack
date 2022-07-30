@@ -16,6 +16,7 @@ defmodule TemporaryHack.Application do
     opentelemetry()
 
     children = [
+      TemporaryHack.PromEx,
       # Start the Ecto repository
       TemporaryHack.Repo,
       # Start the Telemetry supervisor
@@ -24,7 +25,6 @@ defmodule TemporaryHack.Application do
       {Phoenix.PubSub, name: TemporaryHack.PubSub},
       # Start the Endpoint (http/https)
       TemporaryHackWeb.Endpoint,
-      TemporaryHackWeb.Prometheus.Endpoint,
       {Task.Supervisor, name: TemporaryHackWeb.Portfolio.Project.EnrichmentSupervisor},
       Supervisor.child_spec(
         {Cachex,
@@ -57,9 +57,7 @@ defmodule TemporaryHack.Application do
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: TemporaryHack.Supervisor]
-    {:ok, pid} = Supervisor.start_link(children, opts)
-    prometheus()
-    {:ok, pid}
+    Supervisor.start_link(children, opts)
   end
 
   # Tell Phoenix to update the endpoint configuration
@@ -93,12 +91,4 @@ defmodule TemporaryHack.Application do
   end
 
   defp to_hex(int), do: int |> Integer.to_string(16) |> String.downcase()
-
-  defp prometheus do
-    TemporaryHack.PhoenixInstrumenter.setup()
-    TemporaryHack.PipelineInstrumenter.setup()
-    TemporaryHack.RepoInstrumenter.setup()
-    Prometheus.Registry.register_collector(:prometheus_process_collector)
-    TemporaryHack.PrometheusExporter.setup()
-  end
 end
