@@ -94,8 +94,7 @@ config :esbuild,
 config :logger, utc_log: true
 
 config :logger, :console,
-  # format: {LogfmtEx, :format},
-  metadata: [:span_id, :trace_id, :request_id, :mfa, :pid]
+  metadata: [:span_id, :traceID, :mfa, :pid, :connection_type, :status, :duration_ms]
 
 config :logfmt_ex, :opts,
   format: [:level, :message, :metadata],

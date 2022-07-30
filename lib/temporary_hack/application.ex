@@ -86,7 +86,7 @@ defmodule TemporaryHack.Application do
   def handle_router_dispatch_start(_event, _measurements, _meta, _config) do
     with span_ctx when span_ctx != :undefined <- Tracer.current_span_ctx() do
       Logger.metadata(
-        trace_id: span_ctx |> Span.trace_id() |> to_hex(),
+        traceID: span_ctx |> Span.trace_id() |> to_hex(),
         span_id: span_ctx |> Span.span_id() |> to_hex()
       )
     end
