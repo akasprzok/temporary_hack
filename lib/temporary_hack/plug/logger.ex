@@ -25,7 +25,8 @@ defmodule TemporaryHack.Plug.Logger do
 
   @impl true
   def call(conn, level) do
-    Logger.log(level, "Starting request", method: conn.method, path: conn.request_path)
+    Logger.metadata(method: conn.method, path: conn.request_path)
+    Logger.log(level, "Starting request")
 
     start = System.monotonic_time()
 
@@ -34,12 +35,13 @@ defmodule TemporaryHack.Plug.Logger do
       diff = System.convert_time_unit(stop - start, :native, :millisecond)
       status = Integer.to_string(conn.status)
 
-      Logger.log(level, "Finished request",
+      Logger.metadata(
         connection_type: connection_type(conn),
         status: status,
         duration_ms: diff
       )
 
+      Logger.log(level, "Finished request")
       conn
     end)
   end

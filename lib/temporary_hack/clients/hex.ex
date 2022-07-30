@@ -16,7 +16,7 @@ defmodule TemporaryHack.Clients.Hex do
   ]
 
   plug TemporaryHack.Clients.ErlangMiddleware
-  plug Tesla.Middleware.Logger, debug: false
+  plug TemporaryHack.Middleware.Logger
   plug Tesla.Middleware.Telemetry
   plug Tesla.Middleware.PathParams
 

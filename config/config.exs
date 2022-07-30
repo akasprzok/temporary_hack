@@ -1,10 +1,3 @@
-# This file is responsible for configuring your application
-# and its dependencies with the aid of the Config module.
-#
-# This configuration file is loaded before any dependency and
-# is restricted to this project.
-
-# General application configuration
 import Config
 
 config :prometheus, TemporaryHack.PhoenixInstrumenter,
@@ -94,11 +87,26 @@ config :esbuild,
 config :logger, utc_log: true
 
 config :logger, :console,
-  metadata: [:span_id, :traceID, :mfa, :pid, :connection_type, :status, :duration_ms]
+  format: {LogfmtEx, :format},
+  metadata: [
+    :traceID,
+    :pid,
+    :mfa,
+    :path,
+    :connection_type,
+    :span_id,
+    :status,
+    :duration_ms,
+    :url,
+    :method,
+    :query
+  ]
 
 config :logfmt_ex, :opts,
   format: [:level, :message, :metadata],
-  message_key: "msg"
+  message_key: "msg",
+  timestamp_key: "ts",
+  timestamp_format: :iso8601
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason

@@ -19,7 +19,7 @@ defmodule TemporaryHack.Clients.Github do
     username: "akasprzok",
     password: System.fetch_env!("GITHUB_ACCESS_TOKEN")
 
-  plug Tesla.Middleware.Logger, debug: false
+  plug TemporaryHack.Middleware.Logger
   plug Tesla.Middleware.Telemetry
   plug Tesla.Middleware.PathParams
 
