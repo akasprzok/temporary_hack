@@ -1,4 +1,7 @@
 defmodule TemporaryHack.Clients.Hex do
+  @moduledoc """
+  Hex client.
+  """
   use Tesla
 
   require OpenTelemetry.Tracer

@@ -8,7 +8,7 @@ defmodule TemporaryHack.Admin.Portfolio do
 
   alias TemporaryHack.Portfolio.Project
 
-  def list_projects() do
+  def list_projects do
     Project
     |> Repo.all()
   end

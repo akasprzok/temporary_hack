@@ -1,4 +1,7 @@
 defmodule TemporaryHack.Clients.Github do
+  @moduledoc """
+  Github client.
+  """
   use Tesla
 
   require OpenTelemetry.Tracer

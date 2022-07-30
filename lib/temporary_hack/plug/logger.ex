@@ -37,7 +37,12 @@ defmodule TemporaryHack.Plug.Logger do
       stop = System.monotonic_time()
       diff = System.convert_time_unit(stop - start, :native, :millisecond)
       status = Integer.to_string(conn.status)
-      Logger.log(level, "Finished request", connection_type: connection_type(conn), status: status, duration_ms: diff)
+
+      Logger.log(level, "Finished request",
+        connection_type: connection_type(conn),
+        status: status,
+        duration_ms: diff
+      )
 
       conn
     end)
