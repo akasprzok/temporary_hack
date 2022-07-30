@@ -1,13 +1,9 @@
 defmodule TemporaryHack.Plug.Logger do
   @moduledoc """
   A plug for logging basic request information in the format:
-
-      GET /index.html
-      Sent 200 in 572ms
-
   To use it, just plug it into the desired module.
 
-      plug Plug.Logger, log: :debug
+      plug TemporaryHack.Plug.Logger, log: :debug
 
   ## Options
 

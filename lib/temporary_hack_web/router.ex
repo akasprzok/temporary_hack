@@ -4,7 +4,7 @@ defmodule TemporaryHackWeb.Router do
   import TemporaryHackWeb.UserAuth
 
   pipeline :browser do
-    plug Plug.Logger
+    plug TemporaryHack.Plug.Logger
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
@@ -15,7 +15,7 @@ defmodule TemporaryHackWeb.Router do
   end
 
   pipeline :api do
-    plug Plug.Logger
+    plug TemporaryHack.Plug.Logger
     plug :accepts, ["json"]
   end
 
