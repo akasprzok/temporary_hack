@@ -4,6 +4,8 @@ defmodule TemporaryHack.PortfolioFixtures do
   entities via the `TemporaryHack.Portfolio` context.
   """
 
+  alias TemporaryHack.Admin.Portfolio
+
   @doc """
   Generate a project.
   """
@@ -13,7 +15,7 @@ defmodule TemporaryHack.PortfolioFixtures do
       |> Enum.into(%{
         github_repo: "temporary_hack"
       })
-      |> TemporaryHack.Admin.Portfolio.create_project()
+      |> Portfolio.create_project()
 
     project
   end
