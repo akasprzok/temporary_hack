@@ -1,4 +1,9 @@
 defmodule TemporaryHack.Portfolio.ProjectWithMetadata do
+  @moduledoc """
+  Used to enrich a `TemporaryHack.Portfolio.Project` with metadata
+  gathered from a variety of additional APIs.
+  """
+
   alias TemporaryHack.Clients.Github, as: GithubClient
   alias TemporaryHack.Clients.Hex, as: HexClient
 

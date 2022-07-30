@@ -8,7 +8,7 @@ defmodule TemporaryHack.Portfolio do
 
   alias TemporaryHack.Portfolio.{Project, ProjectWithMetadata}
 
-  def list_projects() do
+  def list_projects do
     Project
     |> Repo.all()
     |> Enum.map(&ProjectWithMetadata.enrich/1)

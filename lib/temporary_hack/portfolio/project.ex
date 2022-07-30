@@ -1,4 +1,13 @@
 defmodule TemporaryHack.Portfolio.Project do
+  @moduledoc """
+  A project, defined by its Github repo.
+
+  The aim here is to keep the amount of data stored
+  in the DB as small as possible, and to gather additional
+  information from APIs such as Github, Hex, crates.io, etc.
+  using `TemporaryHack.Portfolio.ProjectWithMetadata`.
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 
