@@ -32,7 +32,7 @@ defmodule TemporaryHack.Clients.Hex do
     end
 
   def package(package) do
-    Tracer.with_span "hex_package" do
+    Tracer.with_span "hex_package", %{attributes: [package: package]} do
       Cachex.fetch!(:hex, package, &do_package/1)
     end
   end

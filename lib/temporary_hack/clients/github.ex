@@ -43,7 +43,7 @@ defmodule TemporaryHack.Clients.Github do
   end
 
   def repo(user, repo) do
-    Tracer.with_span "github_repo" do
+    Tracer.with_span "github_repo", %{attributes: [user: user, repo: repo]} do
       Cachex.fetch!(:github, {user, repo}, &do_repo/1)
     end
   end
