@@ -1,13 +1,19 @@
-<%= link "← All posts", to: Routes.blog_path(@conn, :index)%>
 
-<h1><%= @post.title %></h1>
+<div class="rounded w-full shadow-lg bg-blue-200 m-4 p-4 justify-center">
+<div class="flex justify-between">
+<h1 class="flex justify-start font-bold text-xl mb-2"><%= @post.title %></h1>
 
-<p>
+<p class="flex justify-end text-gray-700">
   <time><%= @post.date %></time>
 </p>
-
-<p>
-  Tagged as <%= Enum.join(@post.tags, ", ") %>
-</p>
-
+</div>
+<div class="px-6 pt-4 pb-2">
+<%= for tag <- @post.tags do %>
+  <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%=tag%></span>
+<% end %>
+</div>
 <%= raw @post.body %>
+<div class="m-4">
+<%= link "← Take me back", to: Routes.blog_path(@conn, :index) %>
+</div>
+</div>

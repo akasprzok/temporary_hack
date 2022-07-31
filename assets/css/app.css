@@ -2,6 +2,10 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+a {
+    @apply underline text-blue-600 hover:text-blue-800 visited:text-purple-600;
+}
+
 .highlight .hll {background-color: #ffffcc}
 .highlight {background-color: #f8f8f8}.highlight .unselectable {
   -webkit-touch-callout: none;

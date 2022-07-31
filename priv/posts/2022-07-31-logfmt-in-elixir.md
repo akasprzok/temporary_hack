@@ -6,6 +6,10 @@
 ---
 WIP
 
+```
+[error] We have a problem error_code=pc_load_letter file=lib/app.ex
+```
+
 ```elixir
 {:logfmt_ex, "~> 0.1"}
 ```
