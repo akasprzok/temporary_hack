@@ -30,6 +30,8 @@ config :esbuild,
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
+config :tesla, adapter: Tesla.Adapter.Hackney
+
 # Configures Elixir's Logger
 config :logger, utc_log: true
 
