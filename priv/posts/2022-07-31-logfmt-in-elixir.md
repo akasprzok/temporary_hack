@@ -5,3 +5,7 @@
 }
 ---
 WIP
+
+```elixir
+{:logfmt_ex, "~> 0.1"}
+```
