@@ -25,7 +25,7 @@ defmodule TemporaryHack.Clients.Github do
 
   plug Tesla.Middleware.Retry,
     delay: 500,
-    max_retries: 5,
+    max_retries: 3,
     max_delay: 1_000,
     jitter_factor: 0.2,
     should_retry: fn
@@ -50,6 +50,7 @@ defmodule TemporaryHack.Clients.Github do
 
   defp do_repo({user, repo}) do
     params = [user: user, repo: repo]
-    get("/repos/:user/:repo", opts: [path_params: params])
+    result = get("/repos/:user/:repo", opts: [path_params: params])
+    {:commit, result}
   end
 end

@@ -19,7 +19,7 @@ defmodule TemporaryHackWeb.Admin.ProjectController do
       {:ok, project} ->
         conn
         |> put_flash(:info, "Project created successfully.")
-        |> redirect(to: Routes.project_path(conn, :show, project))
+        |> redirect(to: Routes.admin_project_path(conn, :show, project))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -44,7 +44,7 @@ defmodule TemporaryHackWeb.Admin.ProjectController do
       {:ok, project} ->
         conn
         |> put_flash(:info, "Project updated successfully.")
-        |> redirect(to: Routes.project_path(conn, :show, project))
+        |> redirect(to: Routes.admin_project_path(conn, :show, project))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", project: project, changeset: changeset)
@@ -57,6 +57,6 @@ defmodule TemporaryHackWeb.Admin.ProjectController do
 
     conn
     |> put_flash(:info, "Project deleted successfully.")
-    |> redirect(to: Routes.project_path(conn, :index))
+    |> redirect(to: Routes.admin_project_path(conn, :index))
   end
 end

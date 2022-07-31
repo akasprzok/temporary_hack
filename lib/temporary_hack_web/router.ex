@@ -82,7 +82,7 @@ defmodule TemporaryHackWeb.Router do
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
   end
 
-  scope "/admin", TemporaryHackWeb.Admin do
+  scope "/admin", TemporaryHackWeb.Admin, as: :admin do
     pipe_through [:browser, :require_authenticated_user, :require_admin]
 
     resources "/projects", ProjectController

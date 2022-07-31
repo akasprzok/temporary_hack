@@ -22,7 +22,7 @@ defmodule TemporaryHack.Clients.Hex do
 
   plug Tesla.Middleware.Retry,
     delay: 500,
-    max_retries: 5,
+    max_retries: 3,
     max_delay: 1_000,
     jitter_factor: 0.2,
     should_retry: fn
@@ -39,6 +39,7 @@ defmodule TemporaryHack.Clients.Hex do
 
   defp do_package(package) do
     params = [package: package]
-    get("/api/packages/:package", opts: [path_params: params])
+    result = get("/api/packages/:package", opts: [path_params: params])
+    {:commit, result}
   end
 end
