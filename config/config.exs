@@ -49,6 +49,22 @@ config :logger, :console,
     :query
   ]
 
+config :logger, :svadilfari,
+  format: {LogfmtEx, :format},
+  metadata: [
+    :traceID,
+    :pid,
+    :mfa,
+    :path,
+    :connection_type,
+    :span_id,
+    :status,
+    :duration_ms,
+    :url,
+    :method,
+    :query
+  ]
+
 config :logfmt_ex, :opts,
   format: [:level, :message, :metadata],
   message_key: "msg",

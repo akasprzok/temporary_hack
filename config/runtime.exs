@@ -16,7 +16,6 @@ if config_env() == :dev do
   config :logger, :backends, [:console, Svadilfari]
 
   config :logger, :svadilfari,
-    format: {LogfmtEx, :format},
     max_buffer: 10,
     client: [
       url: System.fetch_env!("LOKI_URL"),
@@ -78,7 +77,6 @@ if config_env() == :prod do
     api_key: System.fetch_env!("SENDGRID_API_KEY")
 
   config :logger, :svadilfari,
-    format: {LogfmtEx, :format},
     max_buffer: 10,
     client: [
       url: System.fetch_env!("LOKI_URL"),
