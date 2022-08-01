@@ -4,6 +4,8 @@ defmodule TemporaryHack.Portfolio.ProjectWithMetadata do
   gathered from a variety of additional APIs.
   """
 
+  require Logger
+
   alias TemporaryHack.Clients.Github, as: GithubClient
   alias TemporaryHack.Clients.Hex, as: HexClient
 
@@ -18,21 +20,34 @@ defmodule TemporaryHack.Portfolio.ProjectWithMetadata do
             tags: []
 
   def enrich(project) do
-    {:ok, gh_info} = github_info(project)
+    project
+    |> github_info()
+    |> case do
+      {:ok, gh_info} ->
+        project_with_metadata = %__MODULE__{
+          title: project.repo,
+          description: gh_info.description,
+          url: gh_info.html_url,
+          tags: [
+            gh_info.language,
+            gh_info.license
+          ]
+        }
 
-    project_with_metadata = %__MODULE__{
-      title: project.repo,
-      description: gh_info.description,
-      url: gh_info.html_url,
-      tags: [
-        gh_info.language,
-        gh_info.license
-      ]
-    }
+        case gh_info.language do
+          "Elixir" -> add_hex_info(project_with_metadata)
+          _ -> project_with_metadata
+        end
 
-    case gh_info.language do
-      "Elixir" -> add_hex_info(project_with_metadata)
-      _ -> project_with_metadata
+      {:error, reason} ->
+        Logger.error(
+          "Unable to retrieve project #{project.user} - #{project.repo} from github: #{inspect(reason)}"
+        )
+
+        %__MODULE__{
+          title: project.repo,
+          url: "https://github.com/#{project.user}/#{project.repo}"
+        }
     end
   end
 

@@ -2,157 +2,95 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-/* This file is for your main application CSS */
-/* Headers */
-.header {
-  width: 100%;
-  background: #fdfdfd;
-  border-bottom: 1px solid #eaeaea;
-  margin-bottom: 2rem;
-}
-.header section {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.header section :first-child {
-  order: 2;
-}
-.header section :last-child {
-  order: 1;
-}
-.header nav ul,
-.header nav li {
-  margin: 0;
-  padding: 0;
-  display: block;
-  text-align: right;
-  white-space: nowrap;
-}
-.header nav ul {
-  margin: 1rem;
-  margin-top: 0;
-}
-.header nav a {
-  display: block;
+
+a {
+  @apply underline text-blue-600 hover:text-blue-800 visited:text-purple-600;
 }
 
-/* Alerts and form errors used by phx.new */
-.alert {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-.alert-info {
-  color: #31708f;
-  background-color: #d9edf7;
-  border-color: #bce8f1;
-}
-.alert-warning {
-  color: #8a6d3b;
-  background-color: #fcf8e3;
-  border-color: #faebcc;
-}
-.alert-danger {
-  color: #a94442;
-  background-color: #f2dede;
-  border-color: #ebccd1;
-}
-.alert p {
-  margin-bottom: 0;
-}
-.alert:empty {
-  display: none;
-}
-.invalid-feedback {
-  color: #a94442;
-  display: block;
-  margin: -1rem 0 2rem;
+/*.makeup .hll {background-color: #ffffcc}
+.makeup {background-color: #f8f8f8} */
+
+.makeup .unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-/* LiveView specific classes for your customization */
-.phx-no-feedback.invalid-feedback,
-.phx-no-feedback .invalid-feedback {
-  display: none;
-}
-
-.phx-click-loading {
-  opacity: 0.5;
-  transition: opacity 1s ease-out;
-}
-
-.phx-loading{
-  cursor: wait;
-}
-
-.phx-modal {
-  opacity: 1!important;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.4);
-}
-
-.phx-modal-content {
-  background-color: #fefefe;
-  margin: 15vh auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-.phx-modal-close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.phx-modal-close:hover,
-.phx-modal-close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.fade-in-scale {
-  animation: 0.2s ease-in 0s normal forwards 1 fade-in-scale-keys;
-}
-
-.fade-out-scale {
-  animation: 0.2s ease-out 0s normal forwards 1 fade-out-scale-keys;
-}
-
-.fade-in {
-  animation: 0.2s ease-out 0s normal forwards 1 fade-in-keys;
-}
-.fade-out {
-  animation: 0.2s ease-out 0s normal forwards 1 fade-out-keys;
-}
-
-@keyframes fade-in-scale-keys{
-  0% { scale: 0.95; opacity: 0; }
-  100% { scale: 1.0; opacity: 1; }
-}
-
-@keyframes fade-out-scale-keys{
-  0% { scale: 1.0; opacity: 1; }
-  100% { scale: 0.95; opacity: 0; }
-}
-
-@keyframes fade-in-keys{
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-@keyframes fade-out-keys{
-  0% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
+.makeup .bp {color: #3465a4; } /* :name_builtin_pseudo */
+.makeup .c {color: #8f5902; font-style: italic; } /* :comment */
+.makeup .c1 {color: #8f5902; font-style: italic; } /* :comment_single */
+.makeup .ch {color: #8f5902; font-style: italic; } /* :comment_hashbang */
+.makeup .cm {color: #8f5902; font-style: italic; } /* :comment_multiline */
+.makeup .cp {color: #8f5902; font-style: italic; } /* :comment_preproc */
+.makeup .cpf {color: #8f5902; font-style: italic; } /* :comment_preproc_file */
+.makeup .cs {color: #8f5902; font-style: italic; } /* :comment_special */
+.makeup .dl {color: #4e9a06; } /* :string_delimiter */
+.makeup .err {color: #a40000; border: #ef2929; } /* :error */
+.makeup .fm {color: #ffffcc; } /* :name_function_magic */
+.makeup .g {color: #ffffcc; } /* :generic */
+.makeup .gd {color: #a40000; } /* :generic_deleted */
+.makeup .ge {color: #ffffcc; font-style: italic; } /* :generic_emph */
+.makeup .gh {color: #000080; font-weight: bold; } /* :generic_heading */
+.makeup .gi {color: #00A000; } /* :generic_inserted */
+.makeup .go {color: #ffffcc; font-style: italic; } /* :generic_output */ 
+.makeup .gp {color: #8f5902; } /* :generic_prompt */
+.makeup .gr {color: #ef2929; } /* :generic_error */
+.makeup .gs {color: #ffffcc; font-weight: bold; } /* :generic_strong */
+.makeup .gt {color: #a40000; font-weight: bold; } /* :generic_traceback */
+.makeup .gu {color: #800080; font-weight: bold; } /* :generic_subheading */
+.makeup .il {color: #0000cf; font-weight: bold; } /* :number_integer_long */
+.makeup .k {color: #204a87; font-weight: bold; } /* :keyword */
+.makeup .kc {color: #204a87; font-weight: bold; } /* :keyword_constant */
+.makeup .kd {color: #204a87; font-weight: bold; } /* :keyword_declaration */
+.makeup .kn {color: #204a87; font-weight: bold; } /* :keyword_namespace */
+.makeup .kp {color: #204a87; font-weight: bold; } /* :keyword_pseudo */
+.makeup .kr {color: #204a87; font-weight: bold; } /* :keyword_reserved */
+.makeup .kt {color: #204a87; font-weight: bold; } /* :keyword_type */
+.makeup .l {color: #ffffcc; } /* :literal */
+.makeup .ld {color: #ffffcc; } /* :literal_date */
+.makeup .m {color: #0000cf; font-weight: bold; } /* :number */
+.makeup .mb {color: #0000cf; font-weight: bold; } /* :number_bin */ 
+.makeup .mf {color: #0000cf; font-weight: bold; } /* :number_float */
+.makeup .mh {color: #0000cf; font-weight: bold; } /* :number_hex */
+.makeup .mi {color: #0000cf; font-weight: bold; } /* :number_integer */
+.makeup .mo {color: #0000cf; font-weight: bold; } /* :number_oct */
+.makeup .n {color: #ffffcc; } /* :name */
+.makeup .na {color: #c4a000; } /* :name_attribute */
+.makeup .nb {color: #204a87; } /* :name_builtin */
+.makeup .nc {color: #ffffcc; } /* :name_class */
+.makeup .nd {color: #5c35cc; font-weight: bold; } /* :name_decorator */
+.makeup .ne {color: #cc0000; font-weight: bold; } /* :name_exception */
+.makeup .nf {color: #ffffcc; } /* :name_function */
+.makeup .ni {color: #ce5c00; } /* :name_entity */
+.makeup .nl {color: #f57900; } /* :name_label */
+.makeup .nn {color: #ffffcc; } /* :name_namespace */
+.makeup .no {color: #ffffcc; } /* :name_constant */
+.makeup .nt {color: #204a87; font-weight: bold; } /* :name_tag */
+.makeup .nv {color: #ffffcc; } /* :name_variable */
+.makeup .nx {color: #ffffcc; } /* :name_other */
+.makeup .o {color: #ce5c00; font-weight: bold; } /* :operator */
+.makeup .ow {color: #204a87; font-weight: bold; } /* :operator_word */
+.makeup .p {color: #ffffcc; font-weight: bold; } /* :punctuation */
+.makeup .py {color: #ffffcc; } /* :name_property */
+.makeup .s {color: #4e9a06; } /* :string */
+.makeup .s1 {color: #4e9a06; } /* :string_single */
+.makeup .s2 {color: #4e9a06; } /* :string_double */
+.makeup .sa {color: #4e9a06; } /* :string_affix */
+.makeup .sb {color: #4e9a06; } /* :string_backtick */
+.makeup .sc {color: #4e9a06; } /* :string_char */
+.makeup .sd {color: #8f5902; font-style: italic; } /* :string_doc */
+.makeup .se {color: #4e9a06; } /* :string_escape */
+.makeup .sh {color: #4e9a06; } /* :string_heredoc */
+.makeup .si {color: #4e9a06; } /* :string_interpol */
+.makeup .sr {color: #4e9a06; } /* :string_regex */
+.makeup .ss {color: #4e9a06; } /* :string_symbol */
+.makeup .sx {color: #4e9a06; } /* :string_other */
+.makeup .sx {color: #4e9a06; } /* :string_sigil */
+.makeup .vc {color: #ffffcc; } /* :name_variable_class */
+.makeup .vg {color: #ffffcc; } /* :name_variable_global */
+.makeup .vi {color: #ffffcc; } /* :name_variable_instance */
+.makeup .vm {color: #ffffcc; } /* :name_variable_magic */
+.makeup .x {color: #ffffcc; } /* :other */

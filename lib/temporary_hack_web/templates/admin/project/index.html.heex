@@ -13,9 +13,9 @@
       <td class="py-4 px-6"><%= project.user %></td>
       <td class="py-4 px-6"><%= project.repo %></td>
       <td>
-        <span><%= link "Show", to: Routes.project_path(@conn, :show, project) %></span>
-        <span><%= link "Edit", to: Routes.project_path(@conn, :edit, project) %></span>
-        <span><%= link "Delete", to: Routes.project_path(@conn, :delete, project), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <span><%= link "Show", to: Routes.admin_project_path(@conn, :show, project) %></span>
+        <span><%= link "Edit", to: Routes.admin_project_path(@conn, :edit, project) %></span>
+        <span><%= link "Delete", to: Routes.admin_project_path(@conn, :delete, project), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
 <% end %>
@@ -23,4 +23,4 @@
 </table>
 
 </div>
-<span class="m-4"><%= link "New Project", to: Routes.project_path(@conn, :new) %></span>
+<span class="m-4"><%= link "New Project", to: Routes.admin_project_path(@conn, :new) %></span>

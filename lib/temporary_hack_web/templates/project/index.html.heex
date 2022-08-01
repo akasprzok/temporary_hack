@@ -1,7 +1,7 @@
-<section class="flex flex-wrap mx-auto py-10 flex justify-center">
+<section class="flex flex-wrap mx-auto py-10 justify-center">
 <%= for project <- @projects do %>
   <div class="max-w-sm rounded w-full shadow-lg bg-blue-200 m-2 p-2">
-    <div class="font-bold text-xl mb-2"><%= link(project.title, to: project.url)%></div>
+    <%= link(project.title, to: project.url, class: "font-bold text-xl mb-2")%>
     <p class="text-gray-700 text-base"><%= project.description %></p>
     <%= if !Enum.empty?(project.shields) do %>
     <div class="pt-4">

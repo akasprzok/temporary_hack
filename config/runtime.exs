@@ -13,7 +13,7 @@ if System.get_env("PHX_SERVER") && System.get_env("RELEASE_NAME") do
 end
 
 if config_env() == :dev do
-  config :logger, :backends, [:console, Svadilfari]
+  config :logger, :backends, [:console]
 
   config :logger, :svadilfari,
     max_buffer: 10,

@@ -57,6 +57,7 @@ defmodule TemporaryHack.MixProject do
       {:tesla, "~> 1.4"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:cachex, "~> 3.4"},
+      {:nimble_publisher, "~> 0.1"},
       # Phoenix
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
