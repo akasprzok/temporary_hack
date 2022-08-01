@@ -1,4 +1,8 @@
 defmodule TemporaryHack.Blog.Post do
+  @moduledoc """
+  A blog post parsed by NimblePublisher.
+  """
+
   @type t :: %__MODULE__{
           id: String.t(),
           title: String.t(),

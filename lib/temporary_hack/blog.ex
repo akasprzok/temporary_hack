@@ -1,4 +1,9 @@
 defmodule TemporaryHack.Blog do
+  @moduledoc """
+  A blog that uses NimblePublisher.
+
+  Blog posts are located in priv/posts.
+  """
   alias TemporaryHack.Blog.Post
 
   use NimblePublisher,
