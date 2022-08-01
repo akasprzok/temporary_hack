@@ -13,7 +13,7 @@
   <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%=tag%></span>
 <% end %>
 </div>
-<div class="prose prose-pre:bg-slate">
+<div class="prose prose-code:break-words">
 <%= raw @post.body %>
 </div>
 <div class="m-4">

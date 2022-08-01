@@ -24,31 +24,38 @@ These logs are easy to sight read, however there are a variety of drawbacks to t
 
 ### Logfmt
 
-Logfmt is a, well, log format in which each line consists key=value paris:
+Logfmt is a log format in which each line consists key=value paris:
 
 ```
 ts=18:43:12.439 user_id=13 level=error msg=Hello\n
 ```
 
-We can further customize the log format by specifying a `{Module, :function}` tuple for the `:console` logger's `:format` option:
+It's unambiguous, much easier to sight read than JSON, easy to search with `grep`, popularized by [Heroku](https://brandur.org/logfmt), and recommended by [Splunk](https://dev.splunk.com/enterprise/docs/developapps/addsupport/logging/loggingbestpractices/#Use-clear-key-value-pairs).
+
+In Elixir, we can use the `LogfmtEx` library to convert our logs to logfmt.
+
+Let's pull the library into our mix.exs:
+
+```elixir
+{:logfmt_ex, "~> 0.3"}
+```
+
+Then configure the `:console` logger to call LogfmtEx's `:format` function:
 
 
 ```elixir
 config :logger, :console,
-    :format: {Module, :function}
+    :format: {LogfmtEx, :format}
 ```
 
-`LogfmtEx` aims to address these shortcomings as a one-stop-shop for formatting logs.
+Your logs will be emitted in logfmt with sensible defaults, but the order of fields, keys for timestamp and message, timestamp format, and more can be customized. See the [docs](https://hexdocs.pm/logfmt_ex/LogfmtEx.html) for more info.
 
-Add the dependency to your `mix.exs`:
+### On TemporaryHack
 
-```elixir
-{:logfmt_ex, "~> 0.1"}
+This website uses LogfmtEx to format its logs. Here are some examples:
+
+```
+level=info msg="Finished request" traceID=8006567127ae87f1b2b4163ab05ebf3b pid=#PID<0.25691.2> mfa=TemporaryHack.Plug.Logger.call/2 path=/projects connection_type=sent span_id=f0f816caa49080aa status=200 duration_ms=3 method=GET
+level=info msg="Finished request" pid=#PID<0.25614.2> mfa=TemporaryHack.Middleware.Logger.call/3 status=200 duration_ms=89.687 url=https://hex.pm/api/packages/:package method=GET query=""
 ```
 
-And point your logger backend at it for formatting:
-
-```elixir
-config :logger, :console,
-    format: {LogfmtEx, :format}
-```
