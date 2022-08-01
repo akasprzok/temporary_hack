@@ -50,6 +50,28 @@ config :logger, :console,
 
 Your logs will be emitted in logfmt with sensible defaults, but the order of fields, keys for timestamp and message, timestamp format, and more can be customized. See the [docs](https://hexdocs.pm/logfmt_ex/LogfmtEx.html) for more info.
 
+The library considers a variety of edge cases: messages with spaces are quoted, newlines and tabs escaped, and it supports custom encoding for your data types via the `ValueEncoder` protocol.
+
+### Value Encoding
+
+Values are encoded using the `LogfmtEx.ValueEncoder` protocol, making it simple to encode your data types: 
+
+```elixir
+defmodule User do
+  defstruct [:email, :name, :id]
+
+  @doc """
+  Encode user to just the ID so we don't accidentally
+  leak PII into logs.
+  """
+  defimpl LogfmtEx.ValueEncoder do
+    def encode(user), do: to_string(user.id)
+  end
+end
+```
+
+If there is no protocol specified for a given data type, encoding will fall back to `String.Chars`, and finally `Kernel.inspect/1`.
+
 ### On TemporaryHack
 
 This website uses LogfmtEx to format its logs. Here are some examples:
@@ -58,4 +80,6 @@ This website uses LogfmtEx to format its logs. Here are some examples:
 level=info msg="Finished request" traceID=8006567127ae87f1b2b4163ab05ebf3b pid=#PID<0.25691.2> mfa=TemporaryHack.Plug.Logger.call/2 path=/projects connection_type=sent span_id=f0f816caa49080aa status=200 duration_ms=3 method=GET
 level=info msg="Finished request" pid=#PID<0.25614.2> mfa=TemporaryHack.Middleware.Logger.call/3 status=200 duration_ms=89.687 url=https://hex.pm/api/packages/:package method=GET query=""
 ```
+
+
 
