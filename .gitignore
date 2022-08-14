@@ -35,3 +35,5 @@ npm-debug.log
 /.data/
 
 .envrc
+
+.DS_Store
