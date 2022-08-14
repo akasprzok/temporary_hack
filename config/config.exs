@@ -75,6 +75,10 @@ config :logfmt_ex, :opts,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :surface, :components, [
+  {Surface.Components.Form.ErrorTag, default_translator: {TemporaryHackWeb.ErrorHelpers, :translate_error}}
+]
+
 config :phoenix, :logger, false
 
 config :opentelemetry, :resource, service: %{name: "temporary_hack"}

@@ -9,7 +9,7 @@ defmodule TemporaryHack.MixProject do
       version: @version,
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: Mix.compilers(),
+      compilers: Mix.compilers() ++ [:surface],
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -58,6 +58,7 @@ defmodule TemporaryHack.MixProject do
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:cachex, "~> 3.4"},
       {:nimble_publisher, "~> 0.1"},
+      {:surface, "~> 0.7"},
       # Phoenix
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},

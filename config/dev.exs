@@ -31,11 +31,12 @@ config :temporary_hack, TemporaryHackWeb.Endpoint,
 
 # Watch static and templates for browser reloading.
 config :temporary_hack, TemporaryHackWeb.Endpoint,
+  reloadable_compilers: [:gettext, :elixir, :surface],
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/temporary_hack_web/(live|views)/.*(ex)$",
+      ~r"lib/temporary_hack_web/(live|views|components)/.*(ex|sface|js)$",
       ~r"lib/temporary_hack_web/templates/.*(eex)$",
       ~r"posts/.*(md)$"
     ]
