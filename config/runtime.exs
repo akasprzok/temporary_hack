@@ -14,19 +14,6 @@ end
 
 if config_env() == :dev do
   config :logger, :backends, [:console]
-
-  config :logger, :svadilfari,
-    max_buffer: 10,
-    client: [
-      url: System.fetch_env!("LOKI_URL"),
-      opts: [
-        org_id: "tenant1"
-      ]
-    ],
-    labels: [
-      {"env", "dev"},
-      {"service", "temporary_hack"}
-    ]
 end
 
 if config_env() == :prod do

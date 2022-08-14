@@ -13,7 +13,7 @@ defmodule TemporaryHack.PortfolioFixtures do
     {:ok, project} =
       attrs
       |> Enum.into(%{
-        github_repo: "temporary_hack"
+        repo: "temporary_hack"
       })
       |> Portfolio.create_project()
 

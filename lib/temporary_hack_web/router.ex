@@ -85,7 +85,12 @@ defmodule TemporaryHackWeb.Router do
   scope "/admin", TemporaryHackWeb.Admin, as: :admin do
     pipe_through [:browser, :require_authenticated_user, :require_admin]
 
-    resources "/projects", ProjectController
+    live "/projects", ProjectLive.Index, :index
+    live "/projects/new", ProjectLive.Index, :new
+    live "/projects/:id/edit", ProjectLive.Index, :edit
+
+    live "/projects/:id", ProjectLive.Show, :show
+    live "/projects/:id/show/edit", ProjectLive.Show, :edit
   end
 
   scope "/", TemporaryHackWeb do
