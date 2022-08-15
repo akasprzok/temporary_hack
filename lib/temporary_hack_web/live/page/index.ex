@@ -14,6 +14,12 @@ defmodule TemporaryHackWeb.PageLive.Index do
     {:ok, assign(socket, current_user: current_user, posts: posts)}
   end
 
+  def mount(_params, _session, socket) do
+    posts = Blog.latest()
+
+    {:ok, assign(socket, posts: posts)}
+  end
+
   @impl true
   def render(assigns) do
     ~F"""
