@@ -76,7 +76,8 @@ config :logfmt_ex, :opts,
 config :phoenix, :json_library, Jason
 
 config :surface, :components, [
-  {Surface.Components.Form.ErrorTag, default_translator: {TemporaryHackWeb.ErrorHelpers, :translate_error}}
+  {Surface.Components.Form.ErrorTag,
+   default_translator: {TemporaryHackWeb.ErrorHelpers, :translate_error}}
 ]
 
 config :phoenix, :logger, false
