@@ -1,4 +1,6 @@
 defmodule TemporaryHackWeb.Admin.ProjectLive.FormComponent do
+  @moduledoc false
+
   use TemporaryHackWeb, :live_component
 
   alias TemporaryHack.Admin.Portfolio

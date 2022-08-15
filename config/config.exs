@@ -36,7 +36,6 @@ config :tesla, adapter: Tesla.Adapter.Hackney
 config :logger, utc_log: true
 
 config :logger, :console,
-  format: {LogfmtEx, :format},
   metadata: [
     :traceID,
     :pid,
@@ -75,6 +74,11 @@ config :logfmt_ex, :opts,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+config :surface, :components, [
+  {Surface.Components.Form.ErrorTag,
+   default_translator: {TemporaryHackWeb.ErrorHelpers, :translate_error}}
+]
 
 config :phoenix, :logger, false
 

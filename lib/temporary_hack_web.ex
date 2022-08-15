@@ -39,6 +39,18 @@ defmodule TemporaryHackWeb do
 
       # Include shared imports and aliases for views
       unquote(view_helpers())
+      import Surface
+
+      use Surface.View, root: "lib/your_app_web/templates"
+    end
+  end
+
+  def surface_view do
+    quote do
+      use Surface.LiveView,
+        layout: {TemporaryHackWeb.LayoutView, "live.html"}
+
+      unquote(view_helpers())
     end
   end
 
