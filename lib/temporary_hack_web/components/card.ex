@@ -1,18 +1,20 @@
 defmodule TemporaryHackWeb.Components.Card do
   use Surface.Component
 
+  alias Surface.Components.Link
+
   prop title, :string
   prop date, :datetime
   prop id, :string
   prop description, :string
+  prop link, :string
 
   def render(assigns) do
     ~F"""
-    <div id={@id} class="rounded w-full shadow-lg bg-blue-100 m-2 p-2">
+    <div id={@id} class="rounded shadow-lg m-2 p-2">
       <div class="flex justify-between">
         <h2 class="flex justify-start font-bold text-xl mb-2">
-          {@title}
-          <!-- <%= link post.title, to: Routes.blog_path(@conn, :show, post)%> -->
+          <Link label={@title} to={"/blog/#{@id}"} />
         </h2>
 
         <p class="flex justify-end text-gray-700">
