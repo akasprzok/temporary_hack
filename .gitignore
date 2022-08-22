@@ -37,3 +37,6 @@ npm-debug.log
 .envrc
 
 .DS_Store
+
+# Ignore generated js hook files for components
+assets/js/_hooks/
