@@ -77,7 +77,7 @@ defmodule TemporaryHack.MixProject do
       {:opentelemetry_exporter, "~> 1.0"},
       {:opentelemetry_phoenix, "~> 1.0"},
       # Logging
-      {:logfmt_ex, "~> 0.3"},
+      {:logfmt_ex, "~> 0.4"},
       {:svadilfari, "~> 0.1.3"},
       # Testing
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},

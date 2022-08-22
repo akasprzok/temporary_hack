@@ -36,6 +36,7 @@ config :tesla, adapter: Tesla.Adapter.Hackney
 config :logger, utc_log: true
 
 config :logger, :console,
+  format: {LogfmtEx, :format},
   metadata: [
     :traceID,
     :pid,
