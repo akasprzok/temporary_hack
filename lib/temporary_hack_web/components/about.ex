@@ -1,4 +1,9 @@
 defmodule TemporaryHackWeb.Components.About do
+  @moduledoc """
+  A surface component for the "about" section on the main page.
+
+  There's only one of these, but breaking this out helps organize the code better.
+  """
   use Surface.Component
 
   def render(assigns) do

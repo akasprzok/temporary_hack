@@ -1,4 +1,7 @@
 defmodule TemporaryHackWeb.Components.Card do
+  @moduledoc """
+  A surface component for a card on the main page.
+  """
   use Surface.Component
 
   alias Surface.Components.Link
