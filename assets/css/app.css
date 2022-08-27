@@ -41,25 +41,25 @@ a {
 .makeup .gs {color: #ffffcc; font-weight: bold; } /* :generic_strong */
 .makeup .gt {color: #a40000; font-weight: bold; } /* :generic_traceback */
 .makeup .gu {color: #800080; font-weight: bold; } /* :generic_subheading */
-.makeup .il {color: #0000cf; font-weight: bold; } /* :number_integer_long */
-.makeup .k {color: #204a87; font-weight: bold; } /* :keyword */
-.makeup .kc {color: #204a87; font-weight: bold; } /* :keyword_constant */
-.makeup .kd {color: #204a87; font-weight: bold; } /* :keyword_declaration */
-.makeup .kn {color: #204a87; font-weight: bold; } /* :keyword_namespace */
-.makeup .kp {color: #204a87; font-weight: bold; } /* :keyword_pseudo */
-.makeup .kr {color: #204a87; font-weight: bold; } /* :keyword_reserved */
-.makeup .kt {color: #204a87; font-weight: bold; } /* :keyword_type */
+.makeup .il {color: #4848df; font-weight: bold; } /* :number_integer_long */
+.makeup .k {color: #3364af; font-weight: bold; } /* :keyword */
+.makeup .kc {color: #3364af; font-weight: bold; } /* :keyword_constant */
+.makeup .kd {color: #3364af; font-weight: bold; } /* :keyword_declaration */
+.makeup .kn {color: #3364af; font-weight: bold; } /* :keyword_namespace */
+.makeup .kp {color: #3364af; font-weight: bold; } /* :keyword_pseudo */
+.makeup .kr {color: #3364af; font-weight: bold; } /* :keyword_reserved */
+.makeup .kt {color: #3364af; font-weight: bold; } /* :keyword_type */
 .makeup .l {color: #ffffcc; } /* :literal */
 .makeup .ld {color: #ffffcc; } /* :literal_date */
-.makeup .m {color: #0000cf; font-weight: bold; } /* :number */
-.makeup .mb {color: #0000cf; font-weight: bold; } /* :number_bin */ 
-.makeup .mf {color: #0000cf; font-weight: bold; } /* :number_float */
-.makeup .mh {color: #0000cf; font-weight: bold; } /* :number_hex */
-.makeup .mi {color: #0000cf; font-weight: bold; } /* :number_integer */
-.makeup .mo {color: #0000cf; font-weight: bold; } /* :number_oct */
+.makeup .m {color: #4848df; font-weight: bold; } /* :number */
+.makeup .mb {color: #2e2ec9; font-weight: bold; } /* :number_bin */ 
+.makeup .mf {color: #4848df; font-weight: bold; } /* :number_float */
+.makeup .mh {color: #4848df; font-weight: bold; } /* :number_hex */
+.makeup .mi {color: #4848df; font-weight: bold; } /* :number_integer */
+.makeup .mo {color: #4848df; font-weight: bold; } /* :number_oct */
 .makeup .n {color: #ffffcc; } /* :name */
 .makeup .na {color: #c4a000; } /* :name_attribute */
-.makeup .nb {color: #204a87; } /* :name_builtin */
+.makeup .nb {color: #3364af; } /* :name_builtin */
 .makeup .nc {color: #ffffcc; } /* :name_class */
 .makeup .nd {color: #5c35cc; font-weight: bold; } /* :name_decorator */
 .makeup .ne {color: #cc0000; font-weight: bold; } /* :name_exception */
@@ -68,11 +68,11 @@ a {
 .makeup .nl {color: #f57900; } /* :name_label */
 .makeup .nn {color: #ffffcc; } /* :name_namespace */
 .makeup .no {color: #ffffcc; } /* :name_constant */
-.makeup .nt {color: #204a87; font-weight: bold; } /* :name_tag */
+.makeup .nt {color: #3364af; font-weight: bold; } /* :name_tag */
 .makeup .nv {color: #ffffcc; } /* :name_variable */
 .makeup .nx {color: #ffffcc; } /* :name_other */
 .makeup .o {color: #ce5c00; font-weight: bold; } /* :operator */
-.makeup .ow {color: #204a87; font-weight: bold; } /* :operator_word */
+.makeup .ow {color: #3364af; font-weight: bold; } /* :operator_word */
 .makeup .p {color: #ffffcc; font-weight: bold; } /* :punctuation */
 .makeup .py {color: #ffffcc; } /* :name_property */
 .makeup .s {color: #4e9a06; } /* :string */
