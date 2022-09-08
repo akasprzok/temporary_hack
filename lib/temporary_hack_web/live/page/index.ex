@@ -3,7 +3,7 @@ defmodule TemporaryHackWeb.PageLive.Index do
 
   use TemporaryHackWeb, :surface_view
 
-  alias TemporaryHackWeb.Components.{About, Card}
+  alias TemporaryHackWeb.Components.{Card, Icons}
   alias TemporaryHack.{Accounts, Blog}
 
   @impl true
@@ -11,26 +11,12 @@ defmodule TemporaryHackWeb.PageLive.Index do
     current_user = Accounts.get_user_by_session_token(token)
     posts = Blog.latest()
 
-    {:ok, assign(socket, current_user: current_user, posts: posts)}
+    {:ok, assign(socket, current_user: current_user, posts: posts, filter: &Function.identity/1, filter_selected: :blog)}
   end
 
   def mount(_params, _session, socket) do
     posts = Blog.latest()
 
-    {:ok, assign(socket, posts: posts)}
-  end
-
-  @impl true
-  def render(assigns) do
-    ~F"""
-    <div class="relative md:grid grid-cols-[20rem,_1fr] max-w-7xl mx-auto">
-      <About />
-      <div class="font-sans relative px-2 md:px-0 max-h-[90vh] md:overflow-auto">
-        {#for post <- @posts}
-          <Card title={post.title} id={post.id} date={post.date} description={post.description} />
-        {/for}
-      </div>
-    </div>
-    """
+    {:ok, assign(socket, posts: posts, filter: &Function.identity/1, filter_selected: :blog)}
   end
 end

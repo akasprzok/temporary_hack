@@ -1,0 +1,43 @@
+<div class="relative md:grid grid-cols-[20rem,_1fr] max-w-7xl mx-auto">
+    <section class="top-0 flex flex-wrap md:flex-col justify-between md:justify-start items-center gap-2 px-4 pt-4">
+      <div class="w-80 md:h-64 md:w-64 mx-auto max-w-full">
+        <img class="rounded-full" src="/images/andreas_green_mustache.jpeg">
+      </div>
+      <div class="w-full md:w-auto mt-4 pb-6">
+        <h1 class="text-xl text-center">Hi, I'm Andreas Kasprzok</h1>
+        <!--
+        <div class="pt-2 gap-2 mt-2 flex flex-row justify-center">
+          <a class="flex flex-1" href="https://twitter.com/akasprzok">
+            <Icons.Twitter />
+          </a>
+          <a class="flex flex-1" href="https://github.com/akasprzok">
+            <Icons.Github />
+          </a>
+          <a class="flex flex-1" href="https://www.linkedin.com/in/akasprzok/">
+            <Icons.Linkedin />
+          </a>
+        </div>
+        -->
+      </div>
+    </section>
+
+    <section class="relative px-2 md:px-0 max-h-[90vh] md:overflow-auto">
+        <ul class="inline-flex gap-2 pt-4 mb-2 w-full pl-2 md:pl-0 md:sticky top-0 z-10 bg-white">
+            {#for filter <- [:blog, :projects]}
+                <li><button
+                    type="button"
+                    :on-click="filter-content"
+                    :values={filter: filter}
+                    class={"text-slate-500", "border-b": @filter_selected == filter}
+                >{Phoenix.Naming.humanize(filter)}</button></li>
+            {/for}
+        </ul>
+        <ul class="flex flex-col">
+            {#for post <- @posts}
+                <li>
+                <Card title={post.title} id={post.id} date={post.date} description={post.description} />
+                </li>
+            {/for}
+        </ul>
+    </section>
+</div>
