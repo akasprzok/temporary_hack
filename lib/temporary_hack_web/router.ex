@@ -102,9 +102,6 @@ defmodule TemporaryHackWeb.Router do
     get "/users/confirm/:token", UserConfirmationController, :edit
     post "/users/confirm/:token", UserConfirmationController, :update
 
-    get "/projects", ProjectController, :index
-
-    get "/blog", BlogController, :index
     get "/blog/:id", BlogController, :show
   end
 end
