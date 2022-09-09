@@ -14,12 +14,14 @@ defmodule TemporaryHackWeb.Components.Card do
   prop link, :string, required: true
   prop tags, :list, default: []
 
+  slot default, required: true
+
   def render(assigns) do
     ~F"""
     <div id={@id} class="rounded shadow-lg m-2 p-2">
       <div class="flex justify-between">
         <h2 class="flex justify-start font-bold text-xl mb-2">
-          <Link label={@title} to={"/blog/#{@id}"} />
+          <Link label={@title} to={@link} />
         </h2>
 
         <p class="flex justify-end text-gray-700">
@@ -27,7 +29,7 @@ defmodule TemporaryHackWeb.Components.Card do
         </p>
       </div>
 
-      {@description}
+      <#slot />
 
       <div class="px-6 pt-4 pb-2">
         {#for tag <- @tags}
