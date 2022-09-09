@@ -29,13 +29,11 @@ defmodule TemporaryHackWeb.Components.Card do
 
       {@description}
 
-      <!--
       <div class="px-6 pt-4 pb-2">
         {#for tag <- @tags}
           <Tag>{tag}</Tag>
         {/for}
       </div>
-      -->
     </div>
     """
   end
