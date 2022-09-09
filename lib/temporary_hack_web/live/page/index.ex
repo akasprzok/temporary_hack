@@ -10,16 +10,11 @@ defmodule TemporaryHackWeb.PageLive.Index do
   alias TemporaryHack.Portfolio.ProjectWithMetadata
 
   @impl true
-  def mount(_params, %{"user_token" => token} = _session, socket) do
-    current_user = Accounts.get_user_by_session_token(token)
-
-    socket
-    |> assign(current_user: current_user)
-    |> do_mount()
-  end
-
   def mount(_params, _session, socket) do
-    do_mount(socket)
+    content = Blog.latest() ++ Portfolio.list_projects()
+    filter = fn content -> match?(%Post{}, content) end
+    filter_selected = :blog
+    {:ok, assign(socket, content: content, filter: filter, filter_selected: filter_selected)}
   end
 
   @impl true
@@ -33,13 +28,6 @@ defmodule TemporaryHackWeb.PageLive.Index do
       end
 
     {:noreply, assign(socket, filter: filter, filter_selected: filter_selected)}
-  end
-
-  defp do_mount(socket) do
-    content = Blog.latest() ++ Portfolio.list_projects()
-    filter = fn content -> match?(%Post{}, content) end
-    filter_selected = :blog
-    {:ok, assign(socket, content: content, filter: filter, filter_selected: filter_selected)}
   end
 
   @impl true

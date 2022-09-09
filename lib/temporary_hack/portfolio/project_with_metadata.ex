@@ -19,13 +19,13 @@ defmodule TemporaryHack.Portfolio.ProjectWithMetadata do
             shields: [],
             tags: []
 
-  def enrich(project) do
-    project
-    |> github_info()
+  def enrich({user, repo}) do
+    user
+    |> github_info(repo)
     |> case do
       {:ok, gh_info} ->
         project_with_metadata = %__MODULE__{
-          title: project.repo,
+          title: repo,
           description: gh_info.description,
           url: gh_info.html_url,
           tags: [
@@ -41,18 +41,18 @@ defmodule TemporaryHack.Portfolio.ProjectWithMetadata do
 
       {:error, reason} ->
         Logger.error(
-          "Unable to retrieve project #{project.user} - #{project.repo} from github: #{inspect(reason)}"
+          "Unable to retrieve project #{user} - #{repo} from github: #{inspect(reason)}"
         )
 
         %__MODULE__{
-          title: project.repo,
-          url: "https://github.com/#{project.user}/#{project.repo}"
+          title: repo,
+          url: "https://github.com/#{user}/#{repo}"
         }
     end
   end
 
-  defp github_info(project) do
-    case GithubClient.repo(project.user, project.repo) do
+  defp github_info(user, repo) do
+    case GithubClient.repo(user, repo) do
       {:ok, %{status: 200} = response} -> {:ok, parse_github_response(response.body)}
       {:ok, response} -> {:error, response}
       {:error, reason} -> {:error, reason}

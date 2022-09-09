@@ -47,9 +47,7 @@ defmodule TemporaryHack.MixProject do
   defp deps do
     [
       {:bcrypt_elixir, "~> 3.0"},
-      {:postgrex, ">= 0.0.0"},
       {:esbuild, "~> 0.3", runtime: Mix.env() == :dev},
-      {:swoosh, "~> 1.3"},
       {:hackney, "~> 1.18"},
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
@@ -65,15 +63,12 @@ defmodule TemporaryHack.MixProject do
       {:phoenix_live_view, "~> 0.17.5"},
       {:phoenix_live_dashboard, "~> 0.6"},
       {:phoenix, "~> 1.6.6"},
-      {:phoenix_ecto, "~> 4.4"},
-      {:ecto_sql, "~> 3.6"},
       # Prometheus
       {:prom_ex, "~> 1.7"},
       # OpenTelemetry
       {:certifi, "~> 2.8"},
       {:opentelemetry, "~> 1.0"},
       {:opentelemetry_api, "~> 1.0"},
-      {:opentelemetry_ecto, "~> 1.0"},
       {:opentelemetry_exporter, "~> 1.0"},
       {:opentelemetry_phoenix, "~> 1.0"},
       # Logging
@@ -87,18 +82,8 @@ defmodule TemporaryHack.MixProject do
     ]
   end
 
-  # Aliases are shortcuts or tasks specific to the current project.
-  # For example, to install project dependencies and perform other setup tasks, run:
-  #
-  #     $ mix setup
-  #
-  # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup"],
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
     ]
   end

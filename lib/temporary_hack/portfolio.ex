@@ -3,14 +3,10 @@ defmodule TemporaryHack.Portfolio do
   The Admin Portfolio context.
   """
 
-  import Ecto.Query, warn: false
-  alias TemporaryHack.Repo
-
-  alias TemporaryHack.Portfolio.{Project, ProjectWithMetadata}
+  alias TemporaryHack.Portfolio.ProjectWithMetadata
 
   def list_projects do
-    Project
-    |> Repo.all()
+    Application.get_env(:temporary_hack, :projects, [])
     |> Enum.map(&ProjectWithMetadata.enrich/1)
   end
 end

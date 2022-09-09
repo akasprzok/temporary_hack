@@ -1,11 +1,12 @@
 import Config
 
-config :temporary_hack, TemporaryHack.Repo,
-  # and maybe Ecto.LogEntry? Up to you
-  loggers: [TemporaryHack.RepoInstrumenter]
-
-config :temporary_hack,
-  ecto_repos: [TemporaryHack.Repo]
+config :temporary_hack, :projects,
+  [
+    {"akasprzok", "sleipnir"},
+    {"akasprzok", "logfmt_ex"},
+    {"akasprzok", "svadilfari"},
+    {"akasprzok", "temporary_hack"},
+  ]
 
 # Configures the endpoint
 config :temporary_hack, TemporaryHackWeb.Endpoint,
@@ -13,12 +14,6 @@ config :temporary_hack, TemporaryHackWeb.Endpoint,
   render_errors: [view: TemporaryHackWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: TemporaryHack.PubSub,
   live_view: [signing_salt: "eLKkoiun"]
-
-# Configures the mailer
-config :temporary_hack, TemporaryHack.Mailer, adapter: Swoosh.Adapters.Local
-
-# Swoosh API client is needed for adapters other than SMTP.
-config :swoosh, :api_client, false
 
 # Configure esbuild (the version is required)
 config :esbuild,
