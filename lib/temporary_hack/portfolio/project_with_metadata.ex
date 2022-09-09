@@ -13,8 +13,8 @@ defmodule TemporaryHack.Portfolio.ProjectWithMetadata do
   @github_repo_keys ~w(language description html_url stargazers_count license)
 
   @enforce_keys [:title, :url]
-  defstruct title: nil,
-            url: nil,
+  defstruct title: "",
+            url: "",
             description: "",
             shields: [],
             tags: []

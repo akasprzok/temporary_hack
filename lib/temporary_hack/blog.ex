@@ -12,7 +12,12 @@ defmodule TemporaryHack.Blog do
     as: :posts,
     highlighters: [:makeup_elixir, :makeup_erlang]
 
-  @posts Enum.sort_by(@posts, & &1.date, {:desc, Date})
+  @posts @posts
+         |> Enum.sort_by(& &1.date, {:desc, Date})
+         |> Enum.map(fn post ->
+           tags = post.tags |> Enum.sort()
+           %{post | tags: tags}
+         end)
   @tags @posts |> Enum.flat_map(& &1.tags) |> Enum.uniq() |> Enum.sort()
 
   @spec posts :: list(Post.t())
