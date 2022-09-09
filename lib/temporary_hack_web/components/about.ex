@@ -11,7 +11,6 @@ defmodule TemporaryHackWeb.Components.About do
   def render(assigns) do
     ~F"""
     <section class="top-0 flex flex-wrap justify-between md:justify-start items-center gap-2 px-4 pt-4">
-      <h2 class="text-2xl uppercase text-center w-full">Temporary Hack</h2>
       <div class="w-80 md:h-64 md:w-64 mx-auto max-w-full">
         <img class="rounded-full" src="/images/andreas_green_mustache.jpeg">
       </div>
