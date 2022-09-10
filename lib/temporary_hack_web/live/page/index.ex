@@ -4,7 +4,7 @@ defmodule TemporaryHackWeb.PageLive.Index do
   use TemporaryHackWeb, :surface_view
 
   alias TemporaryHackWeb.Components.{About, Card}
-  alias TemporaryHack.{Accounts, Blog}
+  alias TemporaryHack.Blog
   alias TemporaryHack.Blog.Post
   alias TemporaryHack.Portfolio
   alias TemporaryHack.Portfolio.ProjectWithMetadata
