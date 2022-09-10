@@ -17,8 +17,6 @@ defmodule TemporaryHackWeb.ChannelCase do
 
   use ExUnit.CaseTemplate
 
-  alias Ecto.Adapters.SQL.Sandbox
-
   using do
     quote do
       # Import conveniences for testing with channels
@@ -28,11 +26,5 @@ defmodule TemporaryHackWeb.ChannelCase do
       # The default endpoint for testing
       @endpoint TemporaryHackWeb.Endpoint
     end
-  end
-
-  setup tags do
-    pid = Sandbox.start_owner!(TemporaryHack.Repo, shared: not tags[:async])
-    on_exit(fn -> Sandbox.stop_owner(pid) end)
-    :ok
   end
 end

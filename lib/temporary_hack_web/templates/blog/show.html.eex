@@ -14,6 +14,6 @@
 <%= raw @post.body %>
 </div>
 <div class="m-4">
-<%= link "← Take me back", to: Routes.blog_path(@conn, :index) %>
+<%= link "← Take me back", to: "/" %>
 </div>
 </article>

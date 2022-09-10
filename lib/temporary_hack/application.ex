@@ -17,8 +17,6 @@ defmodule TemporaryHack.Application do
 
     children = [
       TemporaryHack.PromEx,
-      # Start the Ecto repository
-      TemporaryHack.Repo,
       # Start the Telemetry supervisor
       TemporaryHackWeb.Telemetry,
       # Start the PubSub system
@@ -70,7 +68,6 @@ defmodule TemporaryHack.Application do
 
   def opentelemetry do
     OpentelemetryPhoenix.setup()
-    OpentelemetryEcto.setup([:temporary_hack, :repo])
 
     :ok =
       :telemetry.attach(

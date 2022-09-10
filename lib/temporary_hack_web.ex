@@ -41,7 +41,7 @@ defmodule TemporaryHackWeb do
       unquote(view_helpers())
       import Surface
 
-      use Surface.View, root: "lib/your_app_web/templates"
+      use Surface.View, root: "lib/temporary_hack_web/templates"
     end
   end
 
