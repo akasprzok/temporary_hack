@@ -11,10 +11,10 @@ defmodule TemporaryHackWeb.Components.About do
   def render(assigns) do
     ~F"""
     <section class="top-0 flex-wrap justify-between md:justify-start items-center gap-2 px-4 pt-4">
-      <div class="w-64 h-64 mx-auto max-w-full">
+      <div class="w-80 md:w-64 md:h-64 mx-auto max-w-full">
         <img class="rounded-6xl" src="/images/andreas_green_mustache.jpeg">
       </div>
-      <div class="w-64 mt-4 pb-6 mx-auto">
+      <div class="w-80 md:w-64 mt-4 pb-6 mx-auto">
         <h1 class="text-xl text-center">Hi, I'm Andreas Kasprzok</h1>
 
         <div class="pt-1 gap-2 mt-2 flex flex-row justify-center">
