@@ -20,7 +20,7 @@ defmodule TemporaryHackWeb.Components.Card do
     ~F"""
     <div id={@id} class="rounded shadow-lg m-2 p-2">
       <div class="flex justify-between">
-        <h2 class="flex justify-start font-bold text-xl mb-2">
+        <h2 class="flex flex-1 justify-start font-bold text-xl mb-2">
           <Link label={@title} to={@link} />
         </h2>
 

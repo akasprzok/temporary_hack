@@ -1,12 +1,11 @@
 import Config
 
-config :temporary_hack, :projects,
-  [
-    {"akasprzok", "sleipnir"},
-    {"akasprzok", "logfmt_ex"},
-    {"akasprzok", "svadilfari"},
-    {"akasprzok", "temporary_hack"},
-  ]
+config :temporary_hack, :projects, [
+  {"akasprzok", "sleipnir"},
+  {"akasprzok", "logfmt_ex"},
+  {"akasprzok", "svadilfari"},
+  {"akasprzok", "temporary_hack"}
+]
 
 # Configures the endpoint
 config :temporary_hack, TemporaryHackWeb.Endpoint,
