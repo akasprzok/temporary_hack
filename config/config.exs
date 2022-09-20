@@ -1,8 +1,11 @@
 import Config
 
 config :temporary_hack, :github,
-  access_token: System.fetch_env!("GITHUB_ACCESS_TOKEN"),
+  token: System.fetch_env!("GITHUB_ACCESS_TOKEN"),
   user: "akasprzok"
+
+config :temporary_hack, :hex,
+  token: System.fetch_env!("HEX_TOKEN")
 
 config :temporary_hack, :projects, [
   {"akasprzok", "sleipnir"},

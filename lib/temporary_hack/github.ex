@@ -3,6 +3,9 @@ defmodule TemporaryHack.Github do
 
   import Cachex.Spec
 
+  require OpenTelemetry.Tracer
+
+  alias OpenTelemetry.Tracer
   alias TemporaryHack.Github.Client
 
   def start_link(init_arg) do
@@ -49,6 +52,8 @@ defmodule TemporaryHack.Github do
   end
 
   def repo(owner, repo) do
-    Client.repo(owner, repo)
+    Tracer.with_span "repo", %{attributes: [owner: owner, repo: repo]} do
+      Cachex.fetch!(:github_repo, {owner, repo}, fn {owner, repo} -> Client.repo(owner, repo) end)
+    end
   end
 end

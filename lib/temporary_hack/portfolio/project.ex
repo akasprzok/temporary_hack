@@ -1,4 +1,4 @@
-defmodule TemporaryHack.Portfolio.ProjectWithMetadata do
+defmodule TemporaryHack.Portfolio.Project do
   @moduledoc """
   Used to enrich a `TemporaryHack.Portfolio.Project` with metadata
   gathered from a variety of additional APIs.
@@ -24,7 +24,7 @@ defmodule TemporaryHack.Portfolio.ProjectWithMetadata do
     |> github_info(repo)
     |> case do
       {:ok, gh_info} ->
-        project_with_metadata = %__MODULE__{
+        project = %__MODULE__{
           title: repo,
           description: gh_info.description,
           url: gh_info.html_url,
@@ -35,8 +35,8 @@ defmodule TemporaryHack.Portfolio.ProjectWithMetadata do
         }
 
         case gh_info.language do
-          "Elixir" -> add_hex_info(project_with_metadata)
-          _ -> project_with_metadata
+          "Elixir" -> add_hex_info(project)
+          _ -> project
         end
 
       {:error, reason} ->

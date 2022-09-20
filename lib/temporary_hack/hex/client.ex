@@ -12,7 +12,7 @@ defmodule TemporaryHack.Hex.Client do
   plug Tesla.Middleware.Headers, [
     {"User-Agent", "TemporaryHack"},
     {"Accept", "application/vnd.hex+erlang"},
-    {"Authorization", System.fetch_env!("HEX_TOKEN")}
+    {"Authorization", :temporary_hack |> Application.fetch_env!(:hex) |> Keyword.fetch!(:token)}
   ]
 
   plug TemporaryHack.Hex.ErlangMiddleware

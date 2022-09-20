@@ -3,10 +3,11 @@ defmodule TemporaryHack.Portfolio do
   The Admin Portfolio context.
   """
 
-  alias TemporaryHack.Portfolio.ProjectWithMetadata
+  alias TemporaryHack.Portfolio.Project
 
   def list_projects do
-    Application.get_env(:temporary_hack, :projects, [])
-    |> Enum.map(&ProjectWithMetadata.enrich/1)
+    :temporary_hack
+    |> Application.get_env(:projects, [])
+    |> Enum.map(&Project.enrich/1)
   end
 end

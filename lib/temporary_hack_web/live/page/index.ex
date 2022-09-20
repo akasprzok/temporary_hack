@@ -7,7 +7,7 @@ defmodule TemporaryHackWeb.PageLive.Index do
   alias TemporaryHack.Blog
   alias TemporaryHack.Blog.Post
   alias TemporaryHack.Portfolio
-  alias TemporaryHack.Portfolio.ProjectWithMetadata
+  alias TemporaryHack.Portfolio.Project
 
   @impl true
   def mount(_params, _session, socket) do
@@ -24,7 +24,7 @@ defmodule TemporaryHackWeb.PageLive.Index do
     filter =
       case filter_selected do
         :blog -> fn content -> match?(%Post{}, content) end
-        :projects -> fn content -> match?(%ProjectWithMetadata{}, content) end
+        :projects -> fn content -> match?(%Project{}, content) end
       end
 
     {:noreply, assign(socket, filter: filter, filter_selected: filter_selected)}
@@ -54,7 +54,7 @@ defmodule TemporaryHackWeb.PageLive.Index do
                   <Card title={item.title} id={item.id} link={"/blog/#{item.id}"} date={item.date} tags={item.tags}>
                     {item.description}
                   </Card>
-                {#match %ProjectWithMetadata{}}
+                {#match %Project{}}
                   <Card title={item.title} id={item.title} link={item.url} tags={item.tags}>
                     {item.description}
                     <p class="pt-2">
