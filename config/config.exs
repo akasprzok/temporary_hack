@@ -4,8 +4,7 @@ config :temporary_hack, :github,
   token: System.fetch_env!("GITHUB_ACCESS_TOKEN"),
   user: "akasprzok"
 
-config :temporary_hack, :hex,
-  token: System.fetch_env!("HEX_TOKEN")
+config :temporary_hack, :hex, token: System.fetch_env!("HEX_TOKEN")
 
 config :temporary_hack, :projects, [
   {"akasprzok", "sleipnir"},

@@ -14,14 +14,13 @@ defmodule TemporaryHack.Github do
 
   @impl true
   def init(_init_arg) do
-    children = [
-    ] ++ caches()
+    children = [] ++ caches()
 
     Supervisor.init(children, strategy: :one_for_one)
   end
 
   defp caches do
-      [
+    [
       Supervisor.child_spec(
         {Cachex,
          [
@@ -48,7 +47,7 @@ defmodule TemporaryHack.Github do
          ]},
         id: :github_latest_commit
       )
-      ]
+    ]
   end
 
   def repo(owner, repo) do

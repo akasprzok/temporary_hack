@@ -11,14 +11,13 @@ defmodule TemporaryHack.Hex do
 
   @impl true
   def init(_init_arg) do
-    children = [
-    ] ++ caches()
+    children = [] ++ caches()
 
     Supervisor.init(children, strategy: :one_for_one)
   end
 
   defp caches do
-      [
+    [
       Supervisor.child_spec(
         {Cachex,
          [
@@ -31,8 +30,8 @@ defmodule TemporaryHack.Hex do
              )
          ]},
         id: :hex
-      ),
-      ]
+      )
+    ]
   end
 
   def package(package) do
