@@ -6,8 +6,8 @@ defmodule TemporaryHack.Portfolio.ProjectWithMetadata do
 
   require Logger
 
-  alias TemporaryHack.Clients.Github, as: GithubClient
-  alias TemporaryHack.Clients.Hex, as: HexClient
+  alias TemporaryHack.Github
+  alias TemporaryHack.Hex
 
   @hex_package_keys ~w(latest_version docs_html_url html_url downloads)
   @github_repo_keys ~w(language description html_url stargazers_count license)
@@ -52,7 +52,7 @@ defmodule TemporaryHack.Portfolio.ProjectWithMetadata do
   end
 
   defp github_info(user, repo) do
-    case GithubClient.repo(user, repo) do
+    case Github.repo(user, repo) do
       {:ok, %{status: 200} = response} -> {:ok, parse_github_response(response.body)}
       {:ok, response} -> {:error, response}
       {:error, reason} -> {:error, reason}
@@ -85,7 +85,7 @@ defmodule TemporaryHack.Portfolio.ProjectWithMetadata do
   end
 
   defp hex_info(package_name) do
-    case HexClient.package(package_name) do
+    case Hex.package(package_name) do
       {:ok, %{status: 200} = response} -> {:ok, parse_hex_response(response.body)}
       {:ok, response} -> {:error, response}
       {:error, reason} -> {:error, reason}

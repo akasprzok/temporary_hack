@@ -1,4 +1,4 @@
-defmodule TemporaryHack.Clients.Github do
+defmodule TemporaryHack.Github.Client do
   @moduledoc """
   Github client.
   """
@@ -19,7 +19,6 @@ defmodule TemporaryHack.Clients.Github do
     username: "akasprzok",
     password: :temporary_hack |> Application.fetch_env!(:github) |> Keyword.fetch!(:access_token)
 
-  plug TemporaryHack.Middleware.Logger
   plug Tesla.Middleware.Telemetry
   plug Tesla.Middleware.PathParams
 

@@ -1,4 +1,4 @@
-defmodule TemporaryHack.Clients.ErlangMiddleware do
+defmodule TemporaryHack.Hex.ErlangMiddleware do
   @moduledoc """
   Middleware for decoding erlang responses from REST APIs.
   """

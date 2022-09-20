@@ -1,4 +1,4 @@
-defmodule TemporaryHack.Clients.Hex do
+defmodule TemporaryHack.Hex.Client do
   @moduledoc """
   Hex client.
   """
@@ -15,8 +15,7 @@ defmodule TemporaryHack.Clients.Hex do
     {"Authorization", System.fetch_env!("HEX_TOKEN")}
   ]
 
-  plug TemporaryHack.Clients.ErlangMiddleware
-  plug TemporaryHack.Middleware.Logger
+  plug TemporaryHack.Hex.ErlangMiddleware
   plug Tesla.Middleware.Telemetry
   plug Tesla.Middleware.PathParams
 

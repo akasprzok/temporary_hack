@@ -24,45 +24,8 @@ defmodule TemporaryHack.Application do
       # Start the Endpoint (http/https)
       TemporaryHackWeb.Endpoint,
       {Task.Supervisor, name: TemporaryHackWeb.Portfolio.Project.EnrichmentSupervisor},
-      Supervisor.child_spec(
-        {Cachex,
-         [
-           name: :github_repo,
-           expiration:
-             expiration(
-               default: :timer.minutes(4),
-               interval: :timer.minutes(2),
-               lazy: true
-             )
-         ]},
-        id: :github_repo
-      ),
-      Supervisor.child_spec(
-        {Cachex,
-         [
-           name: :github_latest_commit,
-           expiration:
-             expiration(
-               default: :timer.minutes(4),
-               interval: :timer.minutes(2),
-               lazy: true
-             )
-         ]},
-        id: :github_latest_commit
-      ),
-      Supervisor.child_spec(
-        {Cachex,
-         [
-           name: :hex,
-           expiration:
-             expiration(
-               default: :timer.minutes(4),
-               interval: :timer.minutes(2),
-               lazy: true
-             )
-         ]},
-        id: :hex
-      )
+      TemporaryHack.Hex,
+      TemporaryHack.Github
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
