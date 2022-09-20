@@ -27,7 +27,7 @@ defmodule TemporaryHack.Application do
       Supervisor.child_spec(
         {Cachex,
          [
-           name: :github,
+           name: :github_repo,
            expiration:
              expiration(
                default: :timer.minutes(4),
@@ -35,7 +35,20 @@ defmodule TemporaryHack.Application do
                lazy: true
              )
          ]},
-        id: :github
+        id: :github_repo
+      ),
+      Supervisor.child_spec(
+        {Cachex,
+         [
+           name: :github_latest_commit,
+           expiration:
+             expiration(
+               default: :timer.minutes(4),
+               interval: :timer.minutes(2),
+               lazy: true
+             )
+         ]},
+        id: :github_latest_commit
       ),
       Supervisor.child_spec(
         {Cachex,

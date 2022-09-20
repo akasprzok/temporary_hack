@@ -1,10 +1,15 @@
 import Config
 
+config :temporary_hack, :github,
+  access_token: System.fetch_env!("GITHUB_ACCESS_TOKEN"),
+  user: "akasprzok"
+
 config :temporary_hack, :projects, [
   {"akasprzok", "sleipnir"},
   {"akasprzok", "logfmt_ex"},
   {"akasprzok", "svadilfari"},
-  {"akasprzok", "temporary_hack"}
+  {"akasprzok", "temporary_hack"},
+  {"open-telemetry", "opentelemetry.io"}
 ]
 
 # Configures the endpoint

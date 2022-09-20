@@ -17,7 +17,7 @@ defmodule TemporaryHack.Clients.Github do
 
   plug Tesla.Middleware.BasicAuth,
     username: "akasprzok",
-    password: System.fetch_env!("GITHUB_ACCESS_TOKEN")
+    password: :temporary_hack |> Application.fetch_env!(:github) |> Keyword.fetch!(:access_token)
 
   plug TemporaryHack.Middleware.Logger
   plug Tesla.Middleware.Telemetry
@@ -42,15 +42,34 @@ defmodule TemporaryHack.Clients.Github do
     get("user/repos")
   end
 
-  def repo(user, repo) do
-    Tracer.with_span "github_repo", %{attributes: [user: user, repo: repo]} do
-      Cachex.fetch!(:github, {user, repo}, &do_repo/1)
+  def repo(owner, repo) do
+    Tracer.with_span "github_repo", %{attributes: [owner: owner, repo: repo]} do
+      Cachex.fetch!(:github_repo, {owner, repo}, &do_repo/1)
     end
   end
 
-  defp do_repo({user, repo}) do
-    params = [user: user, repo: repo]
-    result = get("/repos/:user/:repo", opts: [path_params: params])
-    {:commit, result}
+  defp do_repo({owner, repo}) do
+    params = [owner: owner, repo: repo]
+    response = get("/repos/:owner/:repo", opts: [path_params: params])
+    {:commit, response}
+  end
+
+  def latest_commit(owner, repo) do
+    Tracer.with_span "latest_commit", %{attributes: [owner: owner, repo: repo]} do
+      Cachex.fetch!(:github_latest_commit, {owner, repo}, &do_latest_commit/1)
+    end
+  end
+
+  defp do_latest_commit({owner, repo}) do
+    user = :temporary_hack |> Application.fetch_env!(:github) |> Keyword.fetch!(:user)
+    params = [owner: owner, repo: repo]
+
+    response =
+      get("/repos/:owner/:repo/commits",
+        opts: [path_params: params],
+        query: [author: user, per_page: "1"]
+      )
+
+    {:commit, response}
   end
 end
